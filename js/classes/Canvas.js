@@ -20,7 +20,7 @@ export default class Canvas {
         bgImage = "./backgrounds/level3.png";
         break;
       default:
-        bgImage = "./backgrounds/default.png";
+        bgImage = "/images/start.jpg";
         break;
     }
 
