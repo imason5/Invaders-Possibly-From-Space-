@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "SpaceInvaders";
+  src: url("./fonts/SpaceInvaders.ttf");
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Set the background color */
+body {
+  margin: 0;
+  background-image: url(./images/bg-large.jpg);
+  background-size: cover;
+  background-position: center center;
+  font-family: "SpaceInvaders", sans-serif;
+}
+
+.canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+#gameCanvas {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  border: 3px solid #66c88f;
+  box-shadow: 0 0 20px #66c88f, 0 0 40px #66c88f, 0 0 60px #66c88f,
+    0 0 80px #66c88f;
+  border-radius: 5px;
+}
