@@ -9,10 +9,9 @@
   overflow: hidden;
 }
 
-/* Set the background color */
 body {
   margin: 0;
-  background-image: url(./images/bg-large.jpg);
+  background-image: url(/images/bg-large.jpg);
   background-size: cover;
   background-position: center center;
   font-family: "SpaceInvaders", sans-serif;
@@ -23,12 +22,13 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  position: relative;
+  width: 100%;
 }
 
 #gameCanvas {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  max-width: 900px;
+  max-height: 700px;
   margin: auto;
   border: 3px solid #66c88f;
   box-shadow: 0 0 20px #66c88f, 0 0 40px #66c88f, 0 0 60px #66c88f,
