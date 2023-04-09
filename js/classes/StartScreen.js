@@ -20,30 +20,10 @@ export default class StartScreen {
 
   fadeOutStartScreen() {
     this.startButton.style.opacity = "0";
-    this.fadeOutBackground();
 
     setTimeout(() => {
       this.startButton.style.display = "none";
+      this.game.canvas.setLevelBackground(1);
     }, 1000);
-  }
-
-  fadeOutBackground() {
-    const startScreenOpacity = { value: 1 };
-
-    this.game.canvas.setLevel1Image();
-
-    const animateOpacity = () => {
-      startScreenOpacity.value -= 0.02;
-
-      this.game.canvas.setStartScreenOpacity(startScreenOpacity.value);
-
-      if (startScreenOpacity.value > 0) {
-        requestAnimationFrame(animateOpacity);
-      } else {
-        this.game.canvas.setLevelBackground(1);
-      }
-    };
-
-    animateOpacity();
   }
 }
