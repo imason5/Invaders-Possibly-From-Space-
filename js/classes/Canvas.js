@@ -10,6 +10,9 @@ export default class Canvas {
     let bgImage = "";
 
     switch (level) {
+      case 0:
+        bgImage = "/images/start.jpg";
+        break;
       case 1:
         bgImage = "/images/bg.png";
         break;
@@ -24,12 +27,20 @@ export default class Canvas {
         break;
     }
 
+    this.level = level;
     this.setBackground(bgImage);
   }
 
-  setBackground(backgroundImage) {
-    this.backgroundImage = new Image();
-    this.backgroundImage.src = backgroundImage;
+  getLevel() {
+    return this.level;
+  }
+
+  setStartScreenOpacity(opacity) {
+    this.startScreenOpacity = opacity;
+  }
+
+  setLevel1Opacity(opacity) {
+    this.level1Opacity = opacity;
   }
 
   drawBackground() {
@@ -40,7 +51,33 @@ export default class Canvas {
       this.canvas.width,
       this.canvas.height
     );
+
+    if (this.getLevel() === 1 && this.startScreenOpacity > 0) {
+      this.context.globalAlpha = this.startScreenOpacity;
+      this.context.drawImage(
+        this.level1Image,
+        0,
+        0,
+        this.canvas.width,
+        this.canvas.height
+      );
+      this.context.globalAlpha = 1;
+    }
   }
+
+  // ...
+  setBackground(backgroundImage, callback) {
+    this.backgroundImage = new Image();
+    this.backgroundImage.onload = callback;
+    this.backgroundImage.src = backgroundImage;
+  }
+
+  setLevel1Image(callback) {
+    this.level1Image = new Image();
+    this.level1Image.onload = callback;
+    this.level1Image.src = "/images/bg.png";
+  }
+  // ...
 
   clear() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
