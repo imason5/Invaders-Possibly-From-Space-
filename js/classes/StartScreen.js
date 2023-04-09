@@ -21,9 +21,14 @@ export default class StartScreen {
   fadeOutStartScreen() {
     this.startButton.style.opacity = "0";
 
-    setTimeout(() => {
-      this.startButton.style.display = "none";
-      this.game.canvas.setLevelBackground(1);
-    }, 1000);
+    const startFadeOut = () => {
+      this.game.canvas.fadeOut(1, () => {
+        this.startButton.style.display = "none";
+        this.game.canvas.setLevelBackground(1);
+        this.game.canvas.fadeIn(1);
+      });
+    };
+
+    requestAnimationFrame(startFadeOut);
   }
 }

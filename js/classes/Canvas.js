@@ -53,4 +53,48 @@ export default class Canvas {
   clear() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
+
+  fadeOut(duration, callback) {
+    const startTime = performance.now();
+    let fade = 0;
+
+    const animate = (currentTime) => {
+      const progress = currentTime - startTime;
+      const ratio = progress / (duration * 1000);
+
+      fade = Math.min(1, ratio);
+
+      this.context.fillStyle = `rgba(0, 0, 0, ${fade})`;
+      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      if (fade < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        callback();
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }
+
+  fadeIn(duration) {
+    const startTime = performance.now();
+    let fade = 1;
+
+    const animate = (currentTime) => {
+      const progress = currentTime - startTime;
+      const ratio = progress / (duration * 1000);
+
+      fade = Math.max(0, 1 - ratio);
+
+      this.context.fillStyle = `rgba(0, 0, 0, ${fade})`;
+      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      if (fade > 0) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }
 }
