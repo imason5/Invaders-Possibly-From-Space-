@@ -18,7 +18,7 @@ _List of features you might implement after the MVP_
 
 _List of classes and methods_
 
-## States y States Transitions
+## States & States Transitions
 
 _List of states (views) of your game_
 
@@ -27,7 +27,7 @@ _List of states (views) of your game_
 - [x] Create a canvas
 - [x] Have a splash screen with functionality to start game
 - [x] Have splash screen disappear after game start
-- [ ] Have a player class that can move left and right
+- [ ] Have a player that can move left and right
 - [ ]
 - [ ]
 - [ ]
