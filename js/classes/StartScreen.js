@@ -17,7 +17,6 @@ export default class StartScreen {
       }
     });
   }
-
   fadeOutStartScreen() {
     this.startButton.style.opacity = "0";
 
@@ -26,7 +25,9 @@ export default class StartScreen {
         this.startButton.style.display = "none";
         this.game.canvas.setLevelBackground(1);
         this.game.canvas.fadeIn(1, () => {
-          this.game.player.moveFromLeft();
+          this.game.player.moveFromLeft(() => {
+            this.game.gameStarted = true; 
+          });
         });
       });
     };

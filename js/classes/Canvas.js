@@ -98,5 +98,9 @@ export default class Canvas {
     };
 
     requestAnimationFrame(animate);
+
+    if (fade === 0 && callback) {
+      callback();
+    }
   }
 }
