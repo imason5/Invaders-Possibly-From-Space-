@@ -1,7 +1,7 @@
 import Canvas from "./Canvas.js";
 import Player from "./Player.js";
 import Projectiles from "./Projectiles.js";
-import Invader from "./Invader.js";
+import Invaders from "./Invaders.js";
 
 export default class Game {
   constructor(level) {
@@ -10,9 +10,9 @@ export default class Game {
     this.projectiles = [];
     this.keysPressed = {};
 
-    this.smallInvader = new Invader([50, 50], [394, 477, 76, 66]);
-    this.mediumInvader = new Invader([150, 50], [380, 581, 98, 63]);
-    this.largeInvader = new Invader([250, 50], [370, 686, 102, 69]);
+    this.smallInvader = new Invaders("small", { x: 50, y: 50 });
+    this.mediumInvader = new Invaders("medium", { x: 150, y: 50 });
+    this.largeInvader = new Invaders("large", { x: 250, y: 50 });
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));

@@ -92,6 +92,6 @@ export default class Sprite {
       this.scaledHeight
     );
 
-    context.restore(); // Restore temp canvas to previous state.
+    context.restore();
   }
 }
