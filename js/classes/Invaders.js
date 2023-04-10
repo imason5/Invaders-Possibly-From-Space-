@@ -1,8 +1,9 @@
 import Sprite from "./Sprite.js";
 
 export default class Invaders {
-  constructor(type, position) {
+  constructor(type, position, scale = 0.5) {
     this.position = position;
+    this.scale = scale;
 
     switch (type) {
       case "small":
@@ -17,6 +18,9 @@ export default class Invaders {
       default:
         throw new Error(`Invalid invader type: ${type}`);
     }
+    this.sprite.scalingFactor = this.scale;
+    this.sprite.scaledWidth = this.sprite.width * this.scale;
+    this.sprite.scaledHeight = this.sprite.height * this.scale;
   }
 
   draw(context) {
