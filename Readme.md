@@ -50,7 +50,7 @@ _List of states (views) of your game_
 - [x] Have a splash screen with functionality to start game
 - [x] Have splash screen disappear after game start
 - [x] Have a player that can move left and right
-- [ ] Create player projectiles
+- [x] Create player projectiles
 - [ ] Create invader
 - [ ] Create invader grid
 - [ ] Grid movement

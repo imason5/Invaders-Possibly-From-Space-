@@ -5,7 +5,7 @@ export default class Player {
     this.position = { x: -108, y: 600 };
     this.velocity = { x: 0 };
     this.sprite = new Sprite("/images/sprites.png", 23, 108, 108, 64);
-    this.readyToAnimate = false;
+    this.readyToAnimate = false; // Used to prevent the player from moving before the enter animation has finished.
     this.moving = false;
 
     this.animationId = null;
@@ -18,6 +18,7 @@ export default class Player {
   }
 
   moveFromLeft(callback) {
+    // Animates the player moving from the left side of the screen to the center.
     const startPosition = -this.sprite.scaledWidth;
     const canvasWidth = (this.canvasWidth =
       document.querySelector("#gameCanvas").width);
@@ -36,6 +37,7 @@ export default class Player {
       } else {
         this.position.x = endPosition;
         this.readyToAnimate = false;
+        this.playerReadyToFire = true; // Used to prevent the player from firing before the enter animation has finished.
         if (callback) {
           callback();
         }
@@ -46,14 +48,17 @@ export default class Player {
   }
 
   moveLeft() {
-    this.velocity.x = -10;
+    this.velocity.x = -10; // Change this to change the speed of the player.
   }
 
   moveRight() {
-    this.velocity.x = 10;
+    this.velocity.x = 10; // Change this to change the speed of the player.
   }
 
   animate(currentTime) {
+    // Used to animate the player's movement.
+    // It calculates the new position based on the player's velocity and the time elapsed since the last frame.
+    // It also makes sure the player stays within the bounds of the canvas.
     if (!this.lastFrameTime) {
       this.lastFrameTime = currentTime;
     }
@@ -71,10 +76,12 @@ export default class Player {
 
     this.velocity.x = 0;
 
+    // Recursively calls itself to continue the animation loop.
     this.animationId = requestAnimationFrame(this.animate);
   }
 
   startAnimating() {
+    // Starts the animation loop.
     this.animationId = requestAnimationFrame(this.animate);
   }
 
@@ -85,6 +92,7 @@ export default class Player {
   }
 
   move() {
+    // Updates the player's position based on its velocity.
     const newX = this.position.x + this.velocity.x;
 
     const canvasWidth = document.querySelector("#gameCanvas").width;

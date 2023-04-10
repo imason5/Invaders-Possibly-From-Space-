@@ -2,7 +2,6 @@ export default class Canvas {
   constructor(canvasElement, level) {
     this.canvas = canvasElement;
     this.context = this.canvas.getContext("2d");
-
     this.setLevelBackground(level);
   }
 
@@ -27,11 +26,13 @@ export default class Canvas {
         break;
     }
 
+    // Once the background image has been determined, it is set using the setBackground method.
     this.level = level;
     this.setBackground(bgImage);
   }
 
   getLevel() {
+    // Returns the current level.
     return this.level;
   }
 
@@ -46,15 +47,21 @@ export default class Canvas {
   }
 
   setBackground(backgroundImage) {
+    // Sets background image for the canvas by creating a new Image object
+    // and assigning it to the backgroundImage property.
     this.backgroundImage = new Image();
     this.backgroundImage.src = backgroundImage;
   }
 
   clear() {
+    // Clear entire canvas.
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   fadeOut(duration, callback) {
+    // Gradually fades out the canvas over the specified duration,
+    // and then calls the specified callback function once the fadeout is complete. Necessary
+    // for transitioning from start screen to game screen.
     const startTime = performance.now();
     let fade = 0;
 
@@ -78,7 +85,7 @@ export default class Canvas {
   }
 
   fadeIn(duration, callback) {
-    const startTime = performance.now();
+    const startTime = performance.now(); // Returns the number of milliseconds since the page was loaded.
     let fade = 1;
 
     const animate = (currentTime) => {
@@ -97,9 +104,10 @@ export default class Canvas {
       }
     };
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animate); //
 
     if (fade === 0 && callback) {
+      // If the fade is complete, call the callback function.
       callback();
     }
   }

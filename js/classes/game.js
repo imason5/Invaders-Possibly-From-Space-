@@ -14,11 +14,13 @@ export default class Game {
   }
 
   draw() {
+    // Responsible for drawing the current state of the game.
+    // It clears the canvas, draws the background, the player, and all projectiles,
+    // and updates the player's movement if necessary.
     this.canvas.clear();
     this.canvas.drawBackground();
     this.player.draw(this.canvas.context);
 
-    // Draw projectiles
     this.projectiles.forEach((projectile) => {
       projectile.draw(this.canvas.context);
     });
@@ -45,6 +47,9 @@ export default class Game {
   }
 
   handleKeyDown(event) {
+    // Sets the corresponding key in the keysPressed object to true,
+    // and creates a new projectile if the spacebar is pressed.
+    // Necessary to allow fire while moving.
     this.keysPressed[event.key] = true;
 
     if (event.key === " ") {
@@ -66,11 +71,17 @@ export default class Game {
   }
 
   createProjectile() {
+    if (!this.player.playerReadyToFire) {
+      return; // exit the method if player is not ready to fire
+    }
+    // Creates a new projectile at the player's current position
+    // and adds it to the projectiles array.
     const position = {
-      x: this.player.position.x + this.player.sprite.scaledWidth / 2 - 2.5,
+      x: this.player.position.x + this.player.sprite.scaledWidth / 2 - 2.5, //
       y: this.player.position.y,
     };
     const velocity = {
+      // Change this to change the speed of the projectiles.
       x: 0,
       y: -10,
     };
@@ -79,6 +90,8 @@ export default class Game {
   }
 
   updateProjectiles() {
+    // Updates the positions of all projectiles and removes any
+    // that have gone off the top of the screen.
     this.projectiles.forEach((projectile) => {
       projectile.update();
     });

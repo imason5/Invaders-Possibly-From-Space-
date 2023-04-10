@@ -1,4 +1,6 @@
 function isDarkPixel(r, g, b, a, darknessThreshold = 20) {
+  // Helper function to determine if a pixel is dark enough to be considered transparent
+  // Needed to remove the black background from the sprites
   return (
     r <= darknessThreshold &&
     g <= darknessThreshold &&
@@ -22,6 +24,7 @@ export default class Sprite {
 
   draw(context, posX, posY, removeDarkPixels = true) {
     if (removeDarkPixels) {
+      // If removeDarkPixels is true, the sprite will be drawn with the drawTransparent method.
       this.drawTransparent(context, posX, posY);
     } else {
       context.drawImage(
@@ -39,6 +42,12 @@ export default class Sprite {
   }
 
   drawTransparent(context, posX, posY) {
+    // Creates a temporary canvas to draw the sprite on,
+    // then uses the getImageData method to get the pixel data,
+    // loops through each pixel to check if it is dark enough to be considered transparent
+    // and if so, sets the alpha value to 0, to make it transparent.
+    // The updated pixel data is then drawn to the temporary canvas.
+    // The temporary canvas is then drawn to the main canvas context.
     context.save();
 
     const tempCanvas = document.createElement("canvas");
@@ -83,6 +92,6 @@ export default class Sprite {
       this.scaledHeight
     );
 
-    context.restore();
+    context.restore(); // Restore temp canvas to previous state.
   }
 }
