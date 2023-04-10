@@ -6,6 +6,7 @@ const startScreen = new StartScreen(game);
 
 function gameLoop() {
   if (game.gameStarted) {
+    game.updateProjectiles();
   }
   game.draw();
   requestAnimationFrame(gameLoop);

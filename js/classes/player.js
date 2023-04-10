@@ -6,6 +6,11 @@ export default class Player {
     this.velocity = { x: 0 };
     this.sprite = new Sprite("/images/sprites.png", 23, 108, 108, 64);
     this.readyToAnimate = false;
+    this.moving = false;
+
+    this.animationId = null;
+    this.lastFrameTime = null;
+    this.animate = this.animate.bind(this);
   }
 
   draw(context) {
@@ -48,12 +53,39 @@ export default class Player {
     this.velocity.x = 15;
   }
 
-  animate() {
-    const now = performance.now();
-    const deltaTime = now - this.lastFrameTime;
-    this.lastFrameTime = now;
+  animate(currentTime) {
+    if (!this.lastFrameTime) {
+      this.lastFrameTime = currentTime;
+    }
+
+    const deltaTime = currentTime - this.lastFrameTime;
+    this.lastFrameTime = currentTime;
 
     const newX = this.position.x + this.velocity.x * (deltaTime / 16.67);
+
+    const canvasWidth = document.querySelector("#gameCanvas").width;
+    const playerWidth = this.sprite.scaledWidth;
+    const minX = 0;
+    const maxX = canvasWidth - playerWidth;
+    this.position.x = Math.min(Math.max(newX, minX), maxX);
+
+    this.velocity.x = 0;
+
+    this.animationId = requestAnimationFrame(this.animate);
+  }
+
+  startAnimating() {
+    this.animationId = requestAnimationFrame(this.animate);
+  }
+
+  stopAnimating() {
+    cancelAnimationFrame(this.animationId);
+    this.animationId = null;
+    this.lastFrameTime = null;
+  }
+
+  move() {
+    const newX = this.position.x + this.velocity.x;
 
     const canvasWidth = document.querySelector("#gameCanvas").width;
     const playerWidth = this.sprite.scaledWidth;
