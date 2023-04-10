@@ -11,7 +11,7 @@ export default class Player {
     this.sprite.draw(context, this.position.x, this.position.y);
   }
 
- 
+  // Animates the initial player movement onto the screen
   moveFromLeft() {
     const startPosition = -this.sprite.scaledWidth;
     const canvasWidth = (this.canvasWidth =
@@ -29,10 +29,26 @@ export default class Player {
       if (this.position.x < endPosition) {
         requestAnimationFrame(movePlayer);
       } else {
-        this.position.x = endPosition; 
+        this.position.x = endPosition;
       }
     };
 
     requestAnimationFrame(movePlayer);
+  }
+
+  moveLeft() {
+    this.velocity.x = -10;
+  }
+
+  moveRight() {
+    this.velocity.x = 10;
+  }
+
+  animate() {
+    // Update the player's position based on their current velocity
+    this.position.x += this.velocity.x;
+
+    // Reset the player's velocity after they've moved
+    this.velocity.x = 0;
   }
 }
