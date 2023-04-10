@@ -46,11 +46,11 @@ export default class Player {
   }
 
   moveLeft() {
-    this.velocity.x = -15;
+    this.velocity.x = -10;
   }
 
   moveRight() {
-    this.velocity.x = 15;
+    this.velocity.x = 10;
   }
 
   animate(currentTime) {

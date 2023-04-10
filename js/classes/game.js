@@ -7,6 +7,7 @@ export default class Game {
     this.canvas = new Canvas(document.querySelector("#gameCanvas"), level);
     this.player = new Player();
     this.projectiles = [];
+    this.keysPressed = {};
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
@@ -22,31 +23,46 @@ export default class Game {
       projectile.draw(this.canvas.context);
     });
 
+    if (this.keysPressed["ArrowLeft"] || this.keysPressed["a"]) {
+      this.player.moveLeft();
+      this.player.moving = true;
+    }
+    if (this.keysPressed["ArrowRight"] || this.keysPressed["d"]) {
+      this.player.moveRight();
+      this.player.moving = true;
+    }
+    if (
+      !this.keysPressed["ArrowLeft"] &&
+      !this.keysPressed["a"] &&
+      !this.keysPressed["ArrowRight"] &&
+      !this.keysPressed["d"]
+    ) {
+      this.player.moving = false;
+    }
     if (this.player.moving) {
       this.player.move();
     }
   }
 
   handleKeyDown(event) {
-    this.player.moving = true;
+    this.keysPressed[event.key] = true;
 
-    switch (event.key) {
-      case "ArrowLeft":
-      case "a":
-        this.player.moveLeft();
-        break;
-      case "ArrowRight":
-      case "d":
-        this.player.moveRight();
-        break;
-      case " ":
-        this.createProjectile();
-        break;
+    if (event.key === " ") {
+      this.createProjectile();
     }
   }
 
   handleKeyUp(event) {
-    this.player.moving = false;
+    this.keysPressed[event.key] = false;
+
+    if (
+      !this.keysPressed["ArrowLeft"] &&
+      !this.keysPressed["a"] &&
+      !this.keysPressed["ArrowRight"] &&
+      !this.keysPressed["d"]
+    ) {
+      this.player.moving = false;
+    }
   }
 
   createProjectile() {
