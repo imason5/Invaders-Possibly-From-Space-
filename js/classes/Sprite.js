@@ -15,7 +15,7 @@ export default class Sprite {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.scalingFactor = 2;
+    this.scalingFactor = 1;
     this.scaledWidth = this.width * this.scalingFactor;
     this.scaledHeight = this.height * this.scalingFactor;
   }
