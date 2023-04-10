@@ -1,10 +1,10 @@
 import Canvas from "./Canvas.js";
-import Player from "./Player.js"; // Import the Player class
+import Player from "./Player.js"; 
 
 export default class Game {
   constructor(level) {
     this.canvas = new Canvas(document.querySelector("#gameCanvas"), level);
-    this.player = new Player(); // Create a new Player instance
+    this.player = new Player(); 
   }
 
   draw() {

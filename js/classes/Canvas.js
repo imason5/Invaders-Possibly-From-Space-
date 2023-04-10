@@ -77,7 +77,7 @@ export default class Canvas {
     requestAnimationFrame(animate);
   }
 
-  fadeIn(duration) {
+  fadeIn(duration, callback) {
     const startTime = performance.now();
     let fade = 1;
 
@@ -92,6 +92,8 @@ export default class Canvas {
 
       if (fade > 0) {
         requestAnimationFrame(animate);
+      } else if (callback) {
+        callback();
       }
     };
 

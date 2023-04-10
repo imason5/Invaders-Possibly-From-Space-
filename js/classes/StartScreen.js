@@ -25,7 +25,9 @@ export default class StartScreen {
       this.game.canvas.fadeOut(1, () => {
         this.startButton.style.display = "none";
         this.game.canvas.setLevelBackground(1);
-        this.game.canvas.fadeIn(1);
+        this.game.canvas.fadeIn(1, () => {
+          this.game.player.moveFromLeft();
+        });
       });
     };
 

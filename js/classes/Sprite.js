@@ -39,12 +39,14 @@ export default class Sprite {
   }
 
   drawTransparent(context, posX, posY) {
-    const tempCanvas = document.createElement("canvas");
-    tempCanvas.width = this.width;
-    tempCanvas.height = this.height;
-    const tempCtx = tempCanvas.getContext("2d");
+    context.save();
 
-    tempCtx.drawImage(
+    const tempCanvas = document.createElement("canvas");
+    tempCanvas.width = this.scaledWidth;
+    tempCanvas.height = this.scaledHeight;
+    const tempContext = tempCanvas.getContext("2d");
+
+    tempContext.drawImage(
       this.image,
       this.x,
       this.y,
@@ -52,31 +54,35 @@ export default class Sprite {
       this.height,
       0,
       0,
-      this.width,
-      this.height
+      this.scaledWidth,
+      this.scaledHeight
     );
 
-    const imageData = tempCtx.getImageData(0, 0, this.width, this.height);
+    const imageData = tempContext.getImageData(
+      0,
+      0,
+      this.scaledWidth,
+      this.scaledHeight
+    );
+
     const data = imageData.data;
 
-    for (let y = 0; y < this.height; y++) {
-      for (let x = 0; x < this.width; x++) {
-        const index = (y * this.width + x) * 4;
-        const r = data[index];
-        const g = data[index + 1];
-        const b = data[index + 2];
-        const a = data[index + 3];
-
-        if (!isDarkPixel(r, g, b, a)) {
-          context.fillStyle = `rgba(${r}, ${g}, ${b}, ${a / 255})`;
-          context.fillRect(
-            posX + x * this.scalingFactor,
-            posY + y * this.scalingFactor,
-            this.scalingFactor,
-            this.scalingFactor
-          );
-        }
+    for (let i = 0; i < data.length; i += 4) {
+      if (isDarkPixel(data[i], data[i + 1], data[i + 2], data[i + 3])) {
+        data[i + 3] = 0;
       }
     }
+
+    tempContext.putImageData(imageData, 0, 0);
+
+    context.drawImage(
+      tempCanvas,
+      posX,
+      posY,
+      this.scaledWidth,
+      this.scaledHeight
+    );
+
+    context.restore();
   }
 }
