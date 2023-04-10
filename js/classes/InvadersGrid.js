@@ -31,14 +31,47 @@ export default class InvadersGrid {
         let invader = new Invaders(invaderType, { x: invaderX, y: invaderY });
         this.invadersGrid.push(invader);
       }
+      console.log(this.invadersGrid);
     }
 
     this.canvasContext = canvasContext;
+
+    // Create off-screen canvas
+    this.offscreenCanvas = document.createElement("canvas");
+    this.offscreenCanvas.width = canvasContext.canvas.width;
+    this.offscreenCanvas.height = canvasContext.canvas.height;
+    this.offscreenContext = this.offscreenCanvas.getContext("2d");
+
+    // Draw initial state of invaders on off-screen canvas
+    this.drawOffscreen();
   }
 
-  draw() {
+  // Method for drawing invaders on the off-screen canvas
+  drawOffscreen() {
     this.invadersGrid.forEach((invader) => {
-      invader.draw(this.canvasContext);
+      invader.draw(this.offscreenContext);
     });
+  }
+
+  // Method for updating the off-screen canvas when an invader is destroyed or moves
+  updateOffscreen(invader) {
+    // Clear the off-screen canvas and redraw all invaders except the destroyed one
+    this.offscreenContext.clearRect(
+      0,
+      0,
+      this.offscreenCanvas.width,
+      this.offscreenCanvas.height
+    );
+    this.invadersGrid.forEach((inv) => {
+      if (inv !== invader) {
+        inv.draw(this.offscreenContext);
+      }
+    });
+  }
+
+  // Method for drawing the off-screen canvas to the main game canvas
+  draw() {
+    console.log("Drawing invaders grid");
+    this.canvasContext.drawImage(this.offscreenCanvas, 0, 0);
   }
 }

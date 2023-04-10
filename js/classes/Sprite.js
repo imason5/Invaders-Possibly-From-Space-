@@ -20,6 +20,10 @@ export default class Sprite {
     this.scalingFactor = 1;
     this.scaledWidth = this.width * this.scalingFactor;
     this.scaledHeight = this.height * this.scalingFactor;
+
+    this.image.addEventListener("load", () => {
+      console.log("Sprite image loaded:", this.image.src);
+    });
   }
 
   draw(context, posX, posY, removeDarkPixels = true) {

@@ -24,6 +24,7 @@ export default class Invaders {
   }
 
   draw(context) {
+    console.log("Drawing invader at:", this.position.x, this.position.y);
     this.sprite.draw(context, this.position.x, this.position.y);
   }
 }
