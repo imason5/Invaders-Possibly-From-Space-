@@ -11,7 +11,7 @@ export default class Game {
     this.projectiles = [];
     this.keysPressed = {};
 
-    this.grid = new InvadersGrid(this.canvas.context);
+    this.invadersGrid = new InvadersGrid(this.canvas.context);
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
@@ -25,7 +25,7 @@ export default class Game {
     this.canvas.drawBackground();
     this.player.draw(this.canvas.context);
 
-    this.grid.draw();
+    this.invadersGrid.draw();
 
     this.projectiles.forEach((projectile) => {
       projectile.draw(this.canvas.context);
