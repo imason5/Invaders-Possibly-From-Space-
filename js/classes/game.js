@@ -15,6 +15,11 @@ export default class Game {
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
+
+    this.invadersGrid = new InvadersGrid(this.canvas.context);
+    setInterval(() => {
+      this.invadersGrid.update();
+    }, 800);
   }
 
   draw() {

@@ -3,7 +3,6 @@ import Invaders from "./Invaders.js";
 export default class InvadersGrid {
   constructor(canvasContext) {
     this.invadersGrid = [];
-    this.gridVisible = false;
 
     const invadersPerRow = 11;
     const rows = 5;
@@ -20,6 +19,10 @@ export default class InvadersGrid {
     // Calculate the starting x position to center the grid horizontally
     const startX = (canvasContext.canvas.width - gridWidth) / 2;
     const startY = 50; // Starting y position of the grid
+
+    this.direction = "right";
+    this.movementSpeed = 10;
+    this.dropDownDistance = 30;
 
     for (let row = 0; row < rows; row++) {
       let invaderType = "";
@@ -49,6 +52,8 @@ export default class InvadersGrid {
     this.offscreenCanvas.width = canvasContext.canvas.width;
     this.offscreenCanvas.height = canvasContext.canvas.height;
     this.offscreenContext = this.offscreenCanvas.getContext("2d");
+
+    this.gridPosition = { x: 0, y: 0 };
 
     // Draw initial state of invaders on off-screen canvas
     this.drawOffscreen();
@@ -81,5 +86,58 @@ export default class InvadersGrid {
       this.canvasContext.drawImage(this.offscreenCanvas, 0, 0);
     }
     console.log("Drawing invaders grid");
+  }
+
+  move() {
+    const deltaX =
+      this.direction === "right" ? this.movementSpeed : -this.movementSpeed;
+
+    let edgeReached = false;
+
+    // Check if any invader reaches the edge
+    this.invadersGrid.forEach((invader) => {
+      const futureX = invader.position.x + deltaX;
+      if (
+        !edgeReached &&
+        (futureX <= 0 ||
+          futureX + invader.sprite.scaledWidth >=
+            this.canvasContext.canvas.width)
+      ) {
+        edgeReached = true;
+      }
+    });
+
+    // Calculate future positions based on edgeReached
+    let futurePositions = this.invadersGrid.map((invader) => {
+      const futureX = invader.position.x + deltaX;
+      return {
+        x: futureX,
+        y: edgeReached
+          ? invader.position.y + this.dropDownDistance
+          : invader.position.y,
+      };
+    });
+
+    // Clear the off-screen canvas
+    this.offscreenContext.clearRect(
+      0,
+      0,
+      this.offscreenCanvas.width,
+      this.offscreenCanvas.height
+    );
+
+    // Update the invaders' positions
+    this.invadersGrid.forEach((invader, index) => {
+      invader.position = futurePositions[index];
+    });
+
+    if (edgeReached) {
+      this.direction = this.direction === "right" ? "left" : "right";
+    }
+
+    this.drawOffscreen();
+  }
+  update() {
+    this.move();
   }
 }
