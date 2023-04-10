@@ -3,6 +3,7 @@
 [Click here to see deployed game](http://github.com)
 
 <hr>
+
 ## Description
 
 A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspiration taken from the 1980's arcade game, and from an episode of [Futurama](https://futurama.fandom.com/wiki/Anthology_of_Interest_II). Some twists on the original game include:
@@ -12,6 +13,7 @@ A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspirat
 -
 
 <hr>
+
 ## MVP
 
 - A playable Space Invaders game where the player can move left and right and shoot projectiles at the invaders.
@@ -35,6 +37,7 @@ A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspirat
 - Host on firebase
 
 <hr>
+
 ## Data structure
 
 _List of classes and methods_
@@ -44,6 +47,7 @@ _List of classes and methods_
 _List of states (views) of your game_
 
 <hr>
+
 ## Task
 
 - [x] Create a canvas
@@ -51,7 +55,7 @@ _List of states (views) of your game_
 - [x] Have splash screen disappear after game start
 - [x] Have a player that can move left and right
 - [x] Create player projectiles
-- [ ] Create invader
+- [x] Create invader
 - [ ] Create invader grid
 - [ ] Grid movement
 - [ ] Invader projectile(s)
@@ -60,7 +64,7 @@ _List of states (views) of your game_
 - [ ] Win condition
 - [ ] Restart game
 
-####Bonus
+###Bonus
 
 - [ ] Scoring
 - [ ] Boss ship
