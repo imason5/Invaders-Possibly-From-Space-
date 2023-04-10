@@ -11,11 +11,7 @@ export default class Game {
     this.projectiles = [];
     this.keysPressed = {};
 
-    this.grid = new InvadersGrid();
-
-    // this.smallInvader = new Invaders("small", { x: 50, y: 50 });
-    // this.mediumInvader = new Invaders("medium", { x: 150, y: 50 });
-    // this.largeInvader = new Invaders("large", { x: 250, y: 50 });
+    this.grid = new InvadersGrid(this.canvas.context);
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
@@ -29,15 +25,7 @@ export default class Game {
     this.canvas.drawBackground();
     this.player.draw(this.canvas.context);
 
-    this.grid.invadersGrid.forEach((invader) => {
-      invader.draw(this.canvas.context);
-    });
-
-    console.log(this.grid.invadersGrid);
-
-    // this.smallInvader.draw(this.canvas.context);
-    // this.mediumInvader.draw(this.canvas.context);
-    // this.largeInvader.draw(this.canvas.context);
+    this.grid.draw();
 
     this.projectiles.forEach((projectile) => {
       projectile.draw(this.canvas.context);
