@@ -26,6 +26,8 @@ export default class StartScreen {
         // 1 is the duration of the fadeout
         this.startButton.style.display = "none";
         this.game.canvas.setLevelBackground(1);
+        this.game.showInvadersGrid();
+
         this.game.canvas.fadeIn(1, () => {
           // 1 is the duration of the fadein
           this.game.player.moveFromLeft(() => {

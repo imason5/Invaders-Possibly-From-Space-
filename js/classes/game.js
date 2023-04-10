@@ -105,4 +105,8 @@ export default class Game {
       return projectile.position.y > -projectile.height;
     });
   }
+
+  showInvadersGrid() {
+    this.invadersGrid.gridVisible = true;
+  }
 }
