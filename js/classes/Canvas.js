@@ -16,10 +16,10 @@ export default class Canvas {
         bgImage = "/images/bg.png";
         break;
       case 2:
-        bgImage = "";
+        bgImage = "/images/bg.png";
         break;
       case 3:
-        bgImage = ".";
+        bgImage = "/images/bg.png";
         break;
       default:
         bgImage = "/images/start.jpg";

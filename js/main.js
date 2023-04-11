@@ -1,5 +1,5 @@
-import Game from "/js/classes/Game.js";
-import StartScreen from "/js/classes/StartScreen.js";
+import Game from "/js/classes/game.js";
+import StartScreen from "/js/classes/startscreen.js";
 
 const game = new Game(0);
 const startScreen = new StartScreen(game);

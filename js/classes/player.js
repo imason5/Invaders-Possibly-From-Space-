@@ -1,4 +1,4 @@
-import Sprite from "/js/classes/Sprite.js";
+import Sprite from "/js/classes/sprite.js";
 
 export default class Player {
   constructor() {
