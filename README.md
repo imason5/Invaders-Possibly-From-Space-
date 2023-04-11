@@ -61,13 +61,17 @@ _List of states (views) of your game_
 - [x] Grid movement
 - [x] Player projectile collision with invader
 - [x] Collision and enemy death
-- [ ] Invader projectile(s)
-- [ ] Lose condition
-- [ ] Win condition
-- [ ] Restart game
+- [x] Invader projectile(s)
+- [x] Lose condition - Player hit
+- [ ] Win condition - All invaders destroyed
+- [ ] Lose condition - Invaders reach player's height
+- [ ] Restart game - not reload page
 
 ###Bonus
 
+- [ ] Player lives
+- [ ] Multiple bomb types
+- [ ] Bunkers
 - [ ] Scoring
 - [ ] Boss ship
 - [ ] Powerups

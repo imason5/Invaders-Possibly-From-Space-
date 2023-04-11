@@ -25,6 +25,12 @@ export default class CollisionManager {
           projectiles.splice(i, 1);
           invadersGrid.drawOffscreen();
 
+          // Check if the invaders grid is empty and end the game if it is
+          if (invadersGrid.invadersGrid.length === 0) {
+            this.game.gameOver = true;
+            console.log("Game Won");
+          }
+
           i--;
           break;
         }
