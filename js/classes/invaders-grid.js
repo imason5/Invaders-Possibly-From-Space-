@@ -128,4 +128,38 @@ export default class InvadersGrid {
   removeInvader(index) {
     this.invadersGrid.splice(index, 1);
   }
+
+  getBottomInvaders() {
+    const bottomInvaders = new Array(11).fill(null);
+    const invadersPerRow = 11;
+
+    for (let i = 0; i < this.invadersGrid.length; i++) {
+      const invader = this.invadersGrid[i];
+      const column = i % invadersPerRow;
+
+      if (
+        bottomInvaders[column] === null ||
+        invader.position.y > bottomInvaders[column].position.y
+      ) {
+        bottomInvaders[column] = invader;
+      }
+    }
+
+    return bottomInvaders.filter((invader) => invader !== null);
+  }
+
+
+  getBombDropPosition() {
+    const bottomInvaders = this.getBottomInvaders();
+
+    // Choose a random invader from the bottom row to drop the bomb
+    const randomIndex = Math.floor(Math.random() * bottomInvaders.length);
+    const randomInvader = bottomInvaders[randomIndex];
+
+    // Calculate the bomb's initial position
+    return {
+      x: randomInvader.position.x + randomInvader.sprite.scaledWidth / 2,
+      y: randomInvader.position.y + randomInvader.sprite.scaledHeight,
+    };
+  }
 }

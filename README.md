@@ -21,12 +21,13 @@ A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspirat
 - The invaders move horizontally and vertically, approaching the cannon.
 - The invaders can shoot projectiles at the player.
 - The player can shoot projectiles at the invaders.
-- The invaders die to one shot, if player is hit they lose a life. 3 lives.
+- The invaders die to one shot, if player is hit they die.
 - If the invaders reach the bottom of the screen the player loses.
 - When all invaders are destroyed a congratulations screen. The game board is reset.
 
 ## Backlog
 
+- Player lives
 - Bunkers
 - Scoring
 - Harder levels with faster invaders/more ships/fewer bunkers.
@@ -58,9 +59,9 @@ _List of states (views) of your game_
 - [x] Create invader
 - [x] Create invader grid
 - [x] Grid movement
-- [ ] Player projectile collision with invader
+- [x] Player projectile collision with invader
+- [x] Collision and enemy death
 - [ ] Invader projectile(s)
-- [ ] Collision and enemy death
 - [ ] Lose condition
 - [ ] Win condition
 - [ ] Restart game
@@ -83,5 +84,5 @@ _List of states (views) of your game_
 
 - [Trello Link](https://trello.com/b/mz5nAvYU/invaders-kanban)
 - [Slides Link](http://slides.com)
-- [Github repository Link](http://github.com)
-- [Deployment Link](http://github.com)
+- [Github repository Link](https://github.com/imason5/invaders-game)
+- [Deployment Link](https://invaders-game-lemon.vercel.app/)

@@ -3,6 +3,7 @@ import Player from "/js/classes/player.js";
 import Projectiles from "/js/classes/projectiles.js";
 import InvadersGrid from "/js/classes/invaders-grid.js";
 import CollisionManager from "/js/classes/collision-manager.js";
+import Bombs from "/js/classes/bombs.js";
 
 export default class Game {
   constructor(level) {
@@ -11,6 +12,8 @@ export default class Game {
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
     this.player = new Player();
     this.projectiles = [];
+    this.bombs = [];
+    this.lastBombTime = Date.now();
     this.keysPressed = {};
     this.invadersGrid = new InvadersGrid(this.canvas.context);
     this.collisionManager = new CollisionManager(this);
@@ -28,6 +31,10 @@ export default class Game {
 
     this.projectiles.forEach((projectile) => {
       projectile.draw(this.canvas.context);
+    });
+
+    this.bombs.forEach((bomb) => {
+      bomb.draw(this.canvas.context);
     });
 
     this.collisionManager.checkCollisions();
@@ -120,5 +127,37 @@ export default class Game {
 
   showInvadersGrid() {
     this.invadersGrid.gridVisible = true;
+  }
+
+  spawnBombs() {
+    if (!this.invadersGrid.moving) {
+      return;
+    }
+
+    const now = Date.now();
+    const timeSinceLastBomb = now - this.lastBombTime;
+    const bombSpawnInterval = 2000; // Modify the time interval between spawning bombs
+
+    if (timeSinceLastBomb >= bombSpawnInterval) {
+      this.dropBombFromInvaders();
+      this.lastBombTime = now;
+    }
+  }
+  dropBombFromInvaders() {
+    const bombDropPosition = this.invadersGrid.getBombDropPosition();
+    const bomb = Bombs.dropBomb(bombDropPosition);
+    this.bombs.push(bomb);
+  }
+  updateBombs() {
+    // Updates the positions of all bombs
+    this.bombs.forEach((bomb) => {
+      bomb.update();
+    });
+
+    // Removes any bombs that have gone off the bottom of the screen.
+    this.bombs = this.bombs.filter((bomb) => {
+      const bombOffScreen = bomb.position.y > this.canvas.height + bomb.height;
+      return !bombOffScreen;
+    });
   }
 }

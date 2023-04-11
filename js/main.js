@@ -32,25 +32,17 @@ preloadImages(imageSources, () => {
   const startScreen = new StartScreen(game);
 
   function gameLoop() {
+    // Main loop function of the game.
+    // Updates the projectiles and bombs if the game has started
     if (game.gameStarted) {
       game.updateProjectiles();
+      game.spawnBombs();
+      game.updateBombs();
     }
+    // Updates the canvas and calls itself again.
     game.draw();
     requestAnimationFrame(gameLoop);
   }
 
   gameLoop();
 });
-
-function gameLoop() {
-  // Main loop function of the game.
-  // Updates the projectiles if the game has started
-  if (game.gameStarted) {
-    game.updateProjectiles();
-  }
-  // Updates the canvas and calls itself again.
-  game.draw();
-  requestAnimationFrame(gameLoop);
-}
-
-gameLoop();
