@@ -1,8 +1,7 @@
-import Canvas from "./Canvas.js";
-import Player from "./Player.js";
-import Projectiles from "./Projectiles.js";
-import Invaders from "./Invaders.js";
-import InvadersGrid from "./InvadersGrid.js";
+import Canvas from "/js/classes/Canvas.js";
+import Player from "/js/classes/Player.js";
+import Projectiles from "/js/classes/Projectiles.js";
+import InvadersGrid from "/js/classes/InvadersGrid.js";
 
 export default class Game {
   constructor(level) {

@@ -1,4 +1,4 @@
-import Invaders from "./Invaders.js";
+import Invaders from "/js/classes/Invaders.js";
 
 export default class InvadersGrid {
   constructor(canvasContext) {
