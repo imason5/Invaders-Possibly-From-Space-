@@ -76,8 +76,17 @@ export default class Game {
 
   createProjectile() {
     if (!this.player.playerReadyToFire) {
-      return; // exit the method if player is not ready to fire
+      return;
     }
+
+    const now = Date.now();
+    const timeSinceLastProjectile = now - this.lastProjectileTime;
+    const firingInterval = 500; // Modify the time interval between firing projectiles
+
+    if (timeSinceLastProjectile < firingInterval) {
+      return;
+    }
+
     // Creates a new projectile at the player's current position
     // and adds it to the projectiles array.
     const position = {
@@ -85,12 +94,14 @@ export default class Game {
       y: this.player.position.y,
     };
     const velocity = {
-      // Change this to change the speed of the projectiles.
+      // Modify to change the speed of the projectiles.
       x: 0,
       y: -10,
     };
     const projectile = new Projectiles(position, velocity);
     this.projectiles.push(projectile);
+
+    this.lastProjectileTime = now;
   }
 
   updateProjectiles() {

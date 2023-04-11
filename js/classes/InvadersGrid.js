@@ -7,7 +7,7 @@ export default class InvadersGrid {
     this.direction = "right";
     this.movementSpeed = 10;
     this.dropDownDistance = 30;
-    this.speedFactor = 1; // Increase to make the invaders move faster
+    this.speedFactor = 2; // Increase to make the invaders move faster
     this.lastUpdateTime = null;
     this.gridVisible = false;
 
