@@ -2,6 +2,7 @@ import Canvas from "/js/classes/canvas.js";
 import Player from "/js/classes/player.js";
 import Projectiles from "/js/classes/projectiles.js";
 import InvadersGrid from "/js/classes/invaders-grid.js";
+import CollisionManager from "/js/classes/collision-manager.js";
 
 export default class Game {
   constructor(level) {
@@ -12,6 +13,7 @@ export default class Game {
     this.projectiles = [];
     this.keysPressed = {};
     this.invadersGrid = new InvadersGrid(this.canvas.context);
+    this.collisionManager = new CollisionManager(this);
   }
 
   draw() {
@@ -27,6 +29,8 @@ export default class Game {
     this.projectiles.forEach((projectile) => {
       projectile.draw(this.canvas.context);
     });
+
+    this.collisionManager.checkCollisions();
 
     if (this.keysPressed["ArrowLeft"] || this.keysPressed["a"]) {
       this.player.moveLeft();

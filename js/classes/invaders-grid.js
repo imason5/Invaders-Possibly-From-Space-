@@ -124,4 +124,8 @@ export default class InvadersGrid {
   startInvadersMovement() {
     this.moving = true;
   }
+
+  removeInvader(index) {
+    this.invadersGrid.splice(index, 1);
+  }
 }
