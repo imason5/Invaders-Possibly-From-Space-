@@ -1,6 +1,6 @@
 # Invaders! Possibly From Space!
 
-[Click here to see deployed game](http://github.com)
+[Click here to see deployed game](https://invaders-game-lemon.vercel.app/)
 
 <hr>
 
