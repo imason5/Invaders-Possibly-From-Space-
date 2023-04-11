@@ -17,23 +17,19 @@ export default class Player {
 
   draw(context) {
     if (!this.renderedPlayer) {
-      // If the player has not been rendered yet, draw it to an off-screen canvas
+      // Pre rendering the player image to an off-screen canvas for performance.
       const offscreenCanvas = document.createElement("canvas");
       offscreenCanvas.width = this.sprite.scaledWidth;
       offscreenCanvas.height = this.sprite.scaledHeight;
       const offscreenContext = offscreenCanvas.getContext("2d");
       this.sprite.draw(offscreenContext, 0, 0);
-
-      // Store the rendered player image data
       this.renderedPlayer = offscreenCanvas;
     }
-
-    // Draw the pre-rendered player image data on the main context
     context.drawImage(this.renderedPlayer, this.position.x, this.position.y);
   }
 
   moveFromLeft(callback) {
-    // Animates the player moving from the left side of the screen to the center.
+    // Animates the opening move of the player sprite to the center of the screen.
     const startPosition = -this.sprite.scaledWidth;
     const canvasWidth = (this.canvasWidth =
       document.querySelector("#gameCanvas").width);

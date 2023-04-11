@@ -2,6 +2,7 @@ export default class Projectiles {
   constructor(position, velocity) {
     this.position = position;
     this.velocity = velocity;
+    // Change to modify projectile size.
     this.width = 5;
     this.height = 10;
   }
