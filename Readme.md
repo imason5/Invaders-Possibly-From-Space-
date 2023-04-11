@@ -56,8 +56,9 @@ _List of states (views) of your game_
 - [x] Have a player that can move left and right
 - [x] Create player projectiles
 - [x] Create invader
-- [ ] Create invader grid
-- [ ] Grid movement
+- [x] Create invader grid
+- [x] Grid movement
+- [ ] Player projectile collision with invader
 - [ ] Invader projectile(s)
 - [ ] Collision and enemy death
 - [ ] Lose condition

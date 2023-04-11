@@ -7,19 +7,12 @@ import InvadersGrid from "./InvadersGrid.js";
 export default class Game {
   constructor(level) {
     this.canvas = new Canvas(document.querySelector("#gameCanvas"), level);
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+    document.addEventListener("keyup", this.handleKeyUp.bind(this));
     this.player = new Player();
     this.projectiles = [];
     this.keysPressed = {};
-
     this.invadersGrid = new InvadersGrid(this.canvas.context);
-
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
-    document.addEventListener("keyup", this.handleKeyUp.bind(this));
-
-    this.invadersGrid = new InvadersGrid(this.canvas.context);
-    setInterval(() => {
-      this.invadersGrid.update();
-    }, 800);
   }
 
   draw() {

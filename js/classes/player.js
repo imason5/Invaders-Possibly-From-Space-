@@ -11,10 +11,25 @@ export default class Player {
     this.animationId = null;
     this.lastFrameTime = null;
     this.animate = this.animate.bind(this);
+
+    this.renderedPlayer = null;
   }
 
   draw(context) {
-    this.sprite.draw(context, this.position.x, this.position.y);
+    if (!this.renderedPlayer) {
+      // If the player has not been rendered yet, draw it to an off-screen canvas
+      const offscreenCanvas = document.createElement("canvas");
+      offscreenCanvas.width = this.sprite.scaledWidth;
+      offscreenCanvas.height = this.sprite.scaledHeight;
+      const offscreenContext = offscreenCanvas.getContext("2d");
+      this.sprite.draw(offscreenContext, 0, 0);
+
+      // Store the rendered player image data
+      this.renderedPlayer = offscreenCanvas;
+    }
+
+    // Draw the pre-rendered player image data on the main context
+    context.drawImage(this.renderedPlayer, this.position.x, this.position.y);
   }
 
   moveFromLeft(callback) {

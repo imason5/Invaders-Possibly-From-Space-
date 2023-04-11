@@ -33,6 +33,8 @@ export default class StartScreen {
           this.game.player.moveFromLeft(() => {
             // Moves the player from the left side of the screen to the center
             this.game.gameStarted = true;
+
+            this.game.invadersGrid.startInvadersMovement();
           });
         });
       });

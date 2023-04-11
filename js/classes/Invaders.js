@@ -4,6 +4,8 @@ export default class Invaders {
   constructor(type, position, scale = 0.5) {
     this.position = position;
     this.scale = scale;
+    this.sprite = new Sprite();
+    this.renderedInvader = null;
 
     switch (type) {
       case "small":
@@ -24,7 +26,19 @@ export default class Invaders {
   }
 
   draw(context) {
-    console.log("Drawing invader at:", this.position.x, this.position.y);
-    this.sprite.draw(context, this.position.x, this.position.y);
+    if (!this.renderedInvader) {
+      // If the invader has not been rendered yet, draw it to an off-screen canvas
+      const offscreenCanvas = document.createElement("canvas");
+      offscreenCanvas.width = this.sprite.scaledWidth;
+      offscreenCanvas.height = this.sprite.scaledHeight;
+      const offscreenContext = offscreenCanvas.getContext("2d");
+      this.sprite.drawTransparent(offscreenContext, 0, 0);
+
+      // Store the rendered invader image data
+      this.renderedInvader = offscreenCanvas;
+    }
+
+    // Draw the pre-rendered invader image data on the main context
+    context.drawImage(this.renderedInvader, this.position.x, this.position.y);
   }
 }
