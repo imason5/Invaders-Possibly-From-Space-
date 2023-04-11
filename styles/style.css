@@ -3,7 +3,7 @@
   src: url("./fonts/SpaceInvaders.ttf");
 }
 
-/* General */
+/* GENERAL */
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ body {
   font-family: "SpaceInvaders", sans-serif;
 }
 
-/* Canvas */
+/* CANVAS */
 .canvas-wrapper {
   display: flex;
   justify-content: center;

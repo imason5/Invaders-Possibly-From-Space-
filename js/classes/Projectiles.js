@@ -4,8 +4,8 @@ export default class Projectiles {
     this.velocity = velocity;
     this.width = 5;
     this.height = 10;
-    this.fireInterval = fireInterval; // fire interval in milliseconds
-    this.lastFireTime = 0; // timestamp of the last time a projectile was fired
+    this.fireInterval = fireInterval;
+    this.lastFireTime = 0;
   }
 
   draw(context) {
