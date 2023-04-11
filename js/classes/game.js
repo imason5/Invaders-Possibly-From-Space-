@@ -17,12 +17,19 @@ export default class Game {
     this.keysPressed = {};
     this.invadersGrid = new InvadersGrid(this.canvas.context);
     this.collisionManager = new CollisionManager(this);
+    this.gameOver = false;
   }
 
   draw() {
     // Responsible for drawing the current state of the game.
     // It clears the canvas, draws the background, the player, and all projectiles,
     // and updates the player's movement if necessary.
+
+    if (this.gameOver) {
+      this.drawGameOver();
+      return;
+    }
+
     this.canvas.clear();
     this.canvas.drawBackground();
     this.player.draw(this.canvas.context);
@@ -160,4 +167,6 @@ export default class Game {
       return !bombOffScreen;
     });
   }
+
+  drawGameOver() {}
 }

@@ -32,7 +32,6 @@ export default class Canvas {
   }
 
   getLevel() {
-    // Returns the current level.
     return this.level;
   }
 
@@ -69,7 +68,7 @@ export default class Canvas {
       const progress = currentTime - startTime;
       const ratio = progress / (duration * 1000);
 
-      fade = Math.min(1, ratio);
+      fade = Math.min(1, ratio); // Fade out over the specified duration.
 
       this.context.fillStyle = `rgba(0, 0, 0, ${fade})`;
       this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -92,7 +91,7 @@ export default class Canvas {
       const progress = currentTime - startTime;
       const ratio = progress / (duration * 1000);
 
-      fade = Math.max(0, 1 - ratio);
+      fade = Math.max(0, 1 - ratio); // Fade in over the specified duration.
 
       this.context.fillStyle = `rgba(0, 0, 0, ${fade})`;
       this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);

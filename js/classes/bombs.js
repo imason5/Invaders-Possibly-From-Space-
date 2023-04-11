@@ -16,12 +16,13 @@ export default class Bomb {
     this.position.y += this.velocity.y;
   }
 
-  // Add this static method to the Bomb class
+  // Static method to create a new Bomb object with a specific position
   static dropBomb(position) {
     const velocity = {
       x: 0,
       y: 4, // Modify to change the speed of the bombs
     };
+
     return new Bomb(position, velocity);
   }
 }
