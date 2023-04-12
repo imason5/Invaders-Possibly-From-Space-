@@ -40,6 +40,7 @@ export default class StartScreen {
 
   showButton() {
     this.startButton.style.display = "block";
+    this.startButton.style.opacity = "1";
     console.log(this.startButton);
   }
 }

@@ -2,6 +2,7 @@ import Sprite from "/js/classes/sprite.js";
 
 export default class Player {
   constructor() {
+    this.initialPosition = { x: -108, y: 600 };
     this.position = { x: -108, y: 600 };
     this.velocity = { x: 0 };
     this.sprite = new Sprite("/images/sprites.png", 23, 108, 108, 64);
@@ -29,6 +30,7 @@ export default class Player {
   }
 
   moveFromLeft(callback) {
+    console.log("Moving player from left");
     // Animates the opening move of the player sprite to the center of the screen.
     const startPosition = -this.sprite.scaledWidth;
     const canvasWidth = (this.canvasWidth =
