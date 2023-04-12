@@ -10,22 +10,32 @@ import StartScreen from "/js/classes/startscreen.js";
 
 export default class Game {
   constructor(level) {
+    this.initializeGame(level);
+    this.addEventListeners();
+    this.startGame();
+  }
+
+  initializeGame(level) {
     this.canvas = new Canvas(document.querySelector("#gameCanvas"), level);
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
-    document.addEventListener("keyup", this.handleKeyUp.bind(this));
-    document.addEventListener("keydown", this.handleKeyG.bind(this));
     this.player = new Player();
     this.projectiles = [];
     this.bombs = [];
     this.lastBombTime = Date.now();
     this.keysPressed = {};
+
     this.invadersGrid = new InvadersGrid(this.canvas.context);
     this.collisionManager = new CollisionManager(this);
+    this.bombDropCounter = 0;
+
     this.gameOver = false;
     this.gameWon = false;
-
     this.gameStopped = false;
-    this.bombDropCounter = 0; // Add a counter for bomb drops
+  }
+
+  addEventListeners() {
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+    document.addEventListener("keyup", this.handleKeyUp.bind(this));
+    document.addEventListener("keydown", this.handleKeyG.bind(this));
   }
 
   startGame() {
@@ -49,6 +59,18 @@ export default class Game {
     if (!this.gameStopped) {
       requestAnimationFrame(() => this.gameLoop());
     }
+  }
+
+  handleKeyDown(event) {
+    this.keysPressed[event.key] = true;
+
+    if (event.key === " ") {
+      this.createProjectile();
+    }
+  }
+
+  handleKeyUp(event) {
+    this.keysPressed[event.key] = false;
   }
 
   draw() {
@@ -78,9 +100,9 @@ export default class Game {
     ) {
       this.player.moving = false;
     }
-    // if (this.player.moving) {
-    //   this.player.move();
-    // }
+
+    // Call handlePlayerMovement with the value of this.player.moving
+    this.player.handlePlayerMovement(this.player.moving);
 
     // Draws all projectiles and bombs
     this.projectiles.forEach((projectile) => {
@@ -115,31 +137,6 @@ export default class Game {
       this.restartScreen.draw();
       this.restartScreen.showButton();
       return;
-    }
-  }
-
-  handleKeyDown(event) {
-    this.keysPressed[event.key] = true;
-
-    if (!this.player.isAnimating) {
-      this.player.startAnimating();
-    }
-
-    if (event.key === " ") {
-      this.createProjectile();
-    }
-  }
-
-  handleKeyUp(event) {
-    this.keysPressed[event.key] = false;
-
-    if (
-      !this.keysPressed["ArrowLeft"] &&
-      !this.keysPressed["a"] &&
-      !this.keysPressed["ArrowRight"] &&
-      !this.keysPressed["d"]
-    ) {
-      this.player.stopAnimating();
     }
   }
 
@@ -234,10 +231,12 @@ export default class Game {
     this.gameWon = false;
     this.gameStopped = false;
     this.gameStarted = false;
-    this.player.resetPosition();
+
     this.invadersGrid.reset();
     this.projectiles = [];
     this.bombs = [];
+    this.player.resetPosition();
+    this.player.visible = false;
 
     this.canvas.setLevelBackground(0);
     this.startScreen = new StartScreen(this);

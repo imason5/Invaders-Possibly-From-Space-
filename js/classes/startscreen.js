@@ -25,12 +25,11 @@ export default class StartScreen {
         this.startButton.style.display = "none";
         this.game.canvas.setLevelBackground(1);
         this.game.showInvadersGrid();
+        this.game.player.visible = true;
 
         this.game.canvas.fadeIn(1, () => {
-          this.game.player.moveFromLeft(() => {
-            this.game.gameStarted = true;
-            this.game.invadersGrid.startInvadersMovement();
-          });
+          this.game.gameStarted = true;
+          this.game.invadersGrid.startInvadersMovement();
         });
       });
     };
