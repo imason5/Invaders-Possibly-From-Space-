@@ -20,6 +20,7 @@ export default class RestartScreen {
       "click",
       this.handleRestartButtonClick.bind(this)
     );
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
   }
 
   hideButton() {
@@ -28,6 +29,7 @@ export default class RestartScreen {
       "click",
       this.handleRestartButtonClick
     );
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
 
   handleRestartButtonClick() {
@@ -35,5 +37,12 @@ export default class RestartScreen {
     this.game.resetGame();
     this.game.startGame();
     console.log("Restarting game");
+  }
+
+  handleKeyDown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      this.restartButton.click();
+    }
   }
 }
