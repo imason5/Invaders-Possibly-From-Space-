@@ -15,6 +15,7 @@ export default class Game {
     this.initializeGame(level);
     this.addEventListeners();
     this.startGame();
+    this.setupMusicControlButton();
   }
 
   initializeGame(level) {
@@ -59,6 +60,7 @@ export default class Game {
     }
     // Updates the canvas and calls itself again.
     this.draw();
+    this.draw();
 
     if (!this.gameStopped) {
       requestAnimationFrame(() => this.gameLoop());
@@ -75,6 +77,22 @@ export default class Game {
 
   handleKeyUp(event) {
     this.keysPressed[event.key] = false;
+  }
+
+  update() {
+    if (this.gameOver || this.gameWon) {
+      this.gameStopped = true;
+      this.soundManager.stop("backgroundMusic");
+      this.restartScreen = new RestartScreen(
+        this.canvas,
+        this.gameWon ? "Game Won" : "Game Over",
+        this,
+        this.startScreen
+      );
+      this.restartScreen.draw();
+      this.restartScreen.showButton();
+      return;
+    }
   }
 
   draw() {
@@ -229,6 +247,19 @@ export default class Game {
     this.bombs = this.bombs.filter((bomb) => {
       const bombOffScreen = bomb.position.y > this.canvas.height + bomb.height;
       return !bombOffScreen;
+    });
+  }
+
+  setupMusicControlButton() {
+    const musicControlButton = document.getElementById("musicControl");
+    musicControlButton.addEventListener("click", () => {
+      if (this.soundManager.isPlaying("backgroundMusic")) {
+        this.soundManager.stop("backgroundMusic");
+        musicControlButton.innerText = "Unmute";
+      } else {
+        this.soundManager.play("backgroundMusic");
+        musicControlButton.innerText = "Mute";
+      }
     });
   }
 

@@ -24,6 +24,9 @@ export default class CollisionManager {
           const invaderScore = invader.sprite.points;
           this.game.score.increase(invaderScore);
 
+          // Play the invader killed sound
+          this.game.soundManager.play("invaderKilled");
+
           invadersGrid.removeInvader(j);
           projectiles.splice(i, 1);
           invadersGrid.drawOffscreen();
@@ -54,6 +57,9 @@ export default class CollisionManager {
         console.log("Game Over");
         bombs.splice(i, 1);
         i--;
+
+        // Play the explosion sound
+        this.game.soundManager.play("explosion");
       }
     }
   }

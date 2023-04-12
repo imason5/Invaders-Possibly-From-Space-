@@ -26,6 +26,7 @@ export default class StartScreen {
         this.game.canvas.setLevelBackground(1);
         this.game.showInvadersGrid();
         this.game.player.visible = true;
+        this.game.soundManager.play("backgroundMusic");
 
         this.game.canvas.fadeIn(1, () => {
           this.game.gameStarted = true;
