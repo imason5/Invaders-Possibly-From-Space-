@@ -64,8 +64,8 @@ _List of states (views) of your game_
 - [x] Invader projectile(s)
 - [x] Lose condition - Player hit
 - [x] Win condition - All invaders destroyed
-- [ ] Lose condition - Invaders reach player's height
-- [ ] Restart game - not reload page
+- [x] Lose condition - Invaders reach player's height
+- [x] Restart game - not reload page
 
 ###Bonus
 

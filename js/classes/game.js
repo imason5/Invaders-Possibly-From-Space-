@@ -12,6 +12,7 @@ export default class Game {
     this.canvas = new Canvas(document.querySelector("#gameCanvas"), level);
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
+    document.addEventListener("keydown", this.handleKeyG.bind(this));
     this.player = new Player();
     this.projectiles = [];
     this.bombs = [];
@@ -232,5 +233,13 @@ export default class Game {
     this.startScreen = new StartScreen(this);
     this.startScreen.setupEventListeners();
     this.startScreen.showButton();
+  }
+
+  // CHEATS
+
+  handleKeyG(event) {
+    if (event.key === "g") {
+      this.gameWon = true;
+    }
   }
 }

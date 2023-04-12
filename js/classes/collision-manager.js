@@ -6,6 +6,7 @@ export default class CollisionManager {
   checkCollisions() {
     this.checkProjectileCollisions();
     this.checkBombCollisions();
+    this.checkInvadersReachedPlayer();
   }
 
   // Checks collisions between projectiles and invaders
@@ -52,6 +53,25 @@ export default class CollisionManager {
         console.log("Game Over");
         bombs.splice(i, 1);
         i--;
+      }
+    }
+  }
+
+  checkInvadersReachedPlayer() {
+    const invadersGrid = this.game.invadersGrid;
+    const player = this.game.player;
+
+    for (let i = 0; i < invadersGrid.invadersGrid.length; i++) {
+      const invader = invadersGrid.invadersGrid[i];
+
+      // Check if the invader exists and has reached the player
+      if (
+        invader &&
+        invader.position.y + invader.sprite.scaledHeight >= player.position.y
+      ) {
+        this.game.gameOver = true;
+        console.log("Game Over");
+        return;
       }
     }
   }
