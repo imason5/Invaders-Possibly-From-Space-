@@ -7,6 +7,7 @@ import Bombs from "/js/classes/bombs.js";
 import { WigglyBomb } from "/js/classes/bombs.js";
 import RestartScreen from "/js/classes/restart-screen.js";
 import StartScreen from "/js/classes/startscreen.js";
+import Score from "/js/classes/score.js";
 
 export default class Game {
   constructor(level) {
@@ -30,6 +31,7 @@ export default class Game {
     this.gameOver = false;
     this.gameWon = false;
     this.gameStopped = false;
+    this.score = new Score();
   }
 
   addEventListeners() {
@@ -82,6 +84,8 @@ export default class Game {
     this.player.draw(this.canvas.context);
     this.invadersGrid.draw();
     this.collisionManager.checkCollisions();
+
+    this.score.draw(this.canvas.context);
 
     // Handles player movement
     if (this.keysPressed["ArrowLeft"] || this.keysPressed["a"]) {
@@ -237,11 +241,13 @@ export default class Game {
     this.bombs = [];
     this.player.resetPosition();
     this.player.visible = false;
+    this.player.playerReadyToFire = false;
 
     this.canvas.setLevelBackground(0);
     this.startScreen = new StartScreen(this);
     this.startScreen.setupEventListeners();
     this.startScreen.showButton();
+    this.score.reset();
   }
 
   // CHEATS

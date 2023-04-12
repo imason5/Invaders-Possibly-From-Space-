@@ -20,13 +20,14 @@ export default class CollisionManager {
       for (let j = 0; j < invadersGrid.invadersGrid.length; j++) {
         const invader = invadersGrid.invadersGrid[j];
 
-        // Check if the invader exists and there is a collision between the projectile and invader
         if (invader && this.checkCollision(projectile, invader)) {
+          const invaderScore = invader.sprite.points;
+          this.game.score.increase(invaderScore);
+
           invadersGrid.removeInvader(j);
           projectiles.splice(i, 1);
           invadersGrid.drawOffscreen();
 
-          // Check if the invaders grid is empty and end the game if it is
           if (invadersGrid.invadersGrid.length === 0) {
             this.game.gameWon = true;
             console.log("Game Won");

@@ -30,6 +30,7 @@ export default class StartScreen {
         this.game.canvas.fadeIn(1, () => {
           this.game.gameStarted = true;
           this.game.invadersGrid.startInvadersMovement();
+          this.game.player.playerReadyToFire = true;
         });
       });
     };

@@ -36,6 +36,9 @@ export default class InvadersGrid {
     const startY = 50;
     const grid = [];
 
+    // Invader points
+    const invaderPoints = [30, 20, 20, 10, 10];
+
     // Invader creation - could refactor to allow for different grid layouts
     for (let row = 0; row < rows; row++) {
       let invaderType = row < 1 ? "small" : row < 3 ? "medium" : "large";
@@ -44,6 +47,7 @@ export default class InvadersGrid {
       for (let col = 0; col < invadersPerRow; col++) {
         let invaderX = startX + (invaderWidth + gapX) * col;
         let invader = new Invaders(invaderType, { x: invaderX, y: invaderY });
+        invader.sprite.points = invaderPoints[row];
         grid.push(invader);
       }
     }
