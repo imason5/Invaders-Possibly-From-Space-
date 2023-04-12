@@ -4,6 +4,7 @@ import Projectiles from "/js/classes/projectiles.js";
 import InvadersGrid from "/js/classes/invaders-grid.js";
 import CollisionManager from "/js/classes/collision-manager.js";
 import Bombs from "/js/classes/bombs.js";
+import { WigglyBomb } from "/js/classes/bombs.js";
 import RestartScreen from "/js/classes/restart-screen.js";
 import StartScreen from "/js/classes/startscreen.js";
 
@@ -24,6 +25,7 @@ export default class Game {
     this.gameWon = false;
 
     this.gameStopped = false;
+    this.bombDropCounter = 0; // Add a counter for bomb drops
   }
 
   startGame() {
@@ -203,12 +205,19 @@ export default class Game {
 
   dropBombFromInvaders() {
     const bombDropPosition = this.invadersGrid.getBombDropPosition();
-    const bomb = Bombs.dropBomb(bombDropPosition);
-    this.bombs.push(bomb);
+
+    if (this.bombDropCounter % 3 === 0) {
+      const bomb = Bombs.dropBomb(bombDropPosition);
+      this.bombs.push(bomb);
+    } else {
+      const wigglyBomb = new WigglyBomb(bombDropPosition, { x: 0, y: 4 });
+      this.bombs.push(wigglyBomb);
+    }
+
+    this.bombDropCounter++;
   }
 
   updateBombs() {
-    // Updates the positions of all bombs
     this.bombs.forEach((bomb) => {
       bomb.update();
     });
