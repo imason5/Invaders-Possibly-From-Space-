@@ -76,9 +76,9 @@ export default class Game {
     ) {
       this.player.moving = false;
     }
-    if (this.player.moving) {
-      this.player.move();
-    }
+    // if (this.player.moving) {
+    //   this.player.move();
+    // }
 
     // Draws all projectiles and bombs
     this.projectiles.forEach((projectile) => {
@@ -117,10 +117,11 @@ export default class Game {
   }
 
   handleKeyDown(event) {
-    // Sets the corresponding key in the keysPressed object to true,
-    // and creates a new projectile if the spacebar is pressed.
-    // Necessary to allow fire while moving.
     this.keysPressed[event.key] = true;
+
+    if (!this.player.isAnimating) {
+      this.player.startAnimating();
+    }
 
     if (event.key === " ") {
       this.createProjectile();
@@ -136,7 +137,7 @@ export default class Game {
       !this.keysPressed["ArrowRight"] &&
       !this.keysPressed["d"]
     ) {
-      this.player.moving = false;
+      this.player.stopAnimating();
     }
   }
 

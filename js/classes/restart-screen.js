@@ -14,15 +14,6 @@ export default class RestartScreen {
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  showButton() {
-    this.restartButton.classList.remove("hidden");
-    this.restartButton.addEventListener(
-      "click",
-      this.handleRestartButtonClick.bind(this)
-    );
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
-  }
-
   hideButton() {
     this.restartButton.classList.add("hidden");
     this.restartButton.removeEventListener(
@@ -32,17 +23,28 @@ export default class RestartScreen {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
 
+  showButton() {
+    this.restartButton.classList.remove("hidden");
+    this.handleRestartButtonClick = (event) => {
+      this.hideButton();
+      this.game.resetGame();
+      this.game.startGame();
+      console.log("Restarting game");
+    };
+    this.handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        this.restartButton.click();
+      }
+    };
+    this.restartButton.addEventListener("click", this.handleRestartButtonClick);
+    document.addEventListener("keydown", this.handleKeyDown);
+  }
+
   handleRestartButtonClick() {
     this.hideButton();
     this.game.resetGame();
     this.game.startGame();
     console.log("Restarting game");
-  }
-
-  handleKeyDown(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      this.restartButton.click();
-    }
   }
 }

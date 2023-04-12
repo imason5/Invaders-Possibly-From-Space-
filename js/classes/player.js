@@ -104,18 +104,18 @@ export default class Player {
     this.lastFrameTime = null;
   }
 
-  move() {
-    // Updates the player's position based on its velocity.
-    const newX = this.position.x + this.velocity.x;
+  // move() {
+  //   // Updates the player's position based on its velocity.
+  //   const newX = this.position.x + this.velocity.x;
 
-    const canvasWidth = document.querySelector("#gameCanvas").width;
-    const playerWidth = this.sprite.scaledWidth;
-    const minX = 0;
-    const maxX = canvasWidth - playerWidth;
-    this.position.x = Math.min(Math.max(newX, minX), maxX);
+  //   const canvasWidth = document.querySelector("#gameCanvas").width;
+  //   const playerWidth = this.sprite.scaledWidth;
+  //   const minX = 0;
+  //   const maxX = canvasWidth - playerWidth;
+  //   this.position.x = Math.min(Math.max(newX, minX), maxX);
 
-    this.velocity.x = 0;
-  }
+  //   this.velocity.x = 0;
+  // }
 
   resetPosition() {
     this.position = { ...this.initialPosition };
