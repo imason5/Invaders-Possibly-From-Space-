@@ -1,14 +1,16 @@
+import Sprite from "/js/classes/sprite.js";
 export default class Bomb {
   constructor(position, velocity) {
     this.position = position;
     this.velocity = velocity;
-    this.width = 5;
-    this.height = 15;
+
+    this.sprite = new Sprite("/images/sprites.png", 171, 609, 5, 12);
+    this.width = this.sprite.scaledWidth;
+    this.height = this.sprite.scaledHeight;
   }
 
   draw(context) {
-    context.fillStyle = "red";
-    context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    this.sprite.draw(context, this.position.x, this.position.y);
   }
 
   update() {
