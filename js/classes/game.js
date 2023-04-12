@@ -8,6 +8,7 @@ import { WigglyBomb } from "/js/classes/bombs.js";
 import RestartScreen from "/js/classes/restart-screen.js";
 import StartScreen from "/js/classes/startscreen.js";
 import Score from "/js/classes/score.js";
+import SoundManager from "./sound-manager.js";
 
 export default class Game {
   constructor(level) {
@@ -19,6 +20,7 @@ export default class Game {
   initializeGame(level) {
     this.canvas = new Canvas(document.querySelector("#gameCanvas"), level);
     this.player = new Player();
+    this.soundManager = new SoundManager();
     this.projectiles = [];
     this.bombs = [];
     this.lastBombTime = Date.now();
@@ -170,7 +172,7 @@ export default class Game {
     };
     const projectile = new Projectiles(position, velocity);
     this.projectiles.push(projectile);
-
+    this.soundManager.play("playerShoot");
     this.lastProjectileTime = now;
   }
 
