@@ -4,6 +4,8 @@ import Projectiles from "/js/classes/projectiles.js";
 import InvadersGrid from "/js/classes/invaders-grid.js";
 import CollisionManager from "/js/classes/collision-manager.js";
 import Bombs from "/js/classes/bombs.js";
+import RestartScreen from "/js/classes/restart-screen.js";
+import StartScreen from "/js/classes/startscreen.js";
 
 export default class Game {
   constructor(level) {
@@ -18,34 +20,45 @@ export default class Game {
     this.invadersGrid = new InvadersGrid(this.canvas.context);
     this.collisionManager = new CollisionManager(this);
     this.gameOver = false;
+    this.gameWon = false;
+
+    this.gameStopped = false;
+  }
+
+  startGame() {
+    if (!this.gameStarted) {
+      this.gameStarted = true;
+      this.gameLoop();
+    }
+  }
+
+  gameLoop() {
+    // Main loop function of the game.
+    // Updates the projectiles and bombs if the game has started
+    if (this.gameStarted) {
+      this.updateProjectiles();
+      this.spawnBombs();
+      this.updateBombs();
+    }
+    // Updates the canvas and calls itself again.
+    this.draw();
+
+    if (!this.gameStopped) {
+      requestAnimationFrame(() => this.gameLoop());
+    }
   }
 
   draw() {
     // Responsible for drawing the current state of the game.
     // It clears the canvas, draws the background, the player, and all projectiles,
     // and updates the player's movement if necessary.
-
-    if (this.gameOver) {
-      this.drawGameOver();
-      return;
-    }
-
     this.canvas.clear();
     this.canvas.drawBackground();
     this.player.draw(this.canvas.context);
-
     this.invadersGrid.draw();
-
-    this.projectiles.forEach((projectile) => {
-      projectile.draw(this.canvas.context);
-    });
-
-    this.bombs.forEach((bomb) => {
-      bomb.draw(this.canvas.context);
-    });
-
     this.collisionManager.checkCollisions();
 
+    // Handles player movement
     if (this.keysPressed["ArrowLeft"] || this.keysPressed["a"]) {
       this.player.moveLeft();
       this.player.moving = true;
@@ -64,6 +77,41 @@ export default class Game {
     }
     if (this.player.moving) {
       this.player.move();
+    }
+
+    // Draws all projectiles and bombs
+    this.projectiles.forEach((projectile) => {
+      projectile.draw(this.canvas.context);
+    });
+
+    this.bombs.forEach((bomb) => {
+      bomb.draw(this.canvas.context);
+    });
+
+    if (this.gameOver) {
+      this.gameStopped = true;
+      this.restartScreen = new RestartScreen(
+        this.canvas,
+        "Game Over",
+        this,
+        this.startScreen
+      );
+      this.restartScreen.draw();
+      this.restartScreen.showButton();
+      return;
+    }
+
+    if (this.gameWon) {
+      this.gameStopped = true;
+      this.restartScreen = new RestartScreen(
+        this.canvas,
+        "Game Won",
+        this,
+        this.startScreen
+      );
+      this.restartScreen.draw();
+      this.restartScreen.showButton();
+      return;
     }
   }
 
@@ -150,11 +198,13 @@ export default class Game {
       this.lastBombTime = now;
     }
   }
+
   dropBombFromInvaders() {
     const bombDropPosition = this.invadersGrid.getBombDropPosition();
     const bomb = Bombs.dropBomb(bombDropPosition);
     this.bombs.push(bomb);
   }
+
   updateBombs() {
     // Updates the positions of all bombs
     this.bombs.forEach((bomb) => {
@@ -168,5 +218,19 @@ export default class Game {
     });
   }
 
-  drawGameOver() {}
+  resetGame() {
+    this.gameOver = false;
+    this.gameWon = false;
+    this.gameStopped = false;
+    this.gameStarted = false;
+    this.player.resetPosition();
+    this.invadersGrid.reset();
+    this.projectiles = [];
+    this.bombs = [];
+
+    this.canvas.setLevelBackground(0);
+    this.startScreen = new StartScreen(this);
+    this.startScreen.setupEventListeners();
+    this.startScreen.showButton();
+  }
 }

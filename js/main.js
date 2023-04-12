@@ -1,10 +1,6 @@
 import Game from "/js/classes/game.js";
 import StartScreen from "/js/classes/startscreen.js";
 
-const game = new Game(0);
-const startScreen = new StartScreen(game);
-
-// main.js
 function preloadImages(sources, callback) {
   let loadedImages = 0;
   let images = [];
@@ -24,25 +20,14 @@ function preloadImages(sources, callback) {
 
 const imageSources = [
   "/images/sprites.png",
+  "/images/bg.png",
   // Add any other images that need to be preloaded
 ];
 
 preloadImages(imageSources, () => {
   const game = new Game(0);
   const startScreen = new StartScreen(game);
+  game.startScreen = startScreen;
 
-  function gameLoop() {
-    // Main loop function of the game.
-    // Updates the projectiles and bombs if the game has started
-    if (game.gameStarted) {
-      game.updateProjectiles();
-      game.spawnBombs();
-      game.updateBombs();
-    }
-    // Updates the canvas and calls itself again.
-    game.draw();
-    requestAnimationFrame(gameLoop);
-  }
-
-  gameLoop();
+  game.startGame(); // Start the game loop
 });

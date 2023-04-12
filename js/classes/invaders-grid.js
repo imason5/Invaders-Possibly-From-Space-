@@ -148,7 +148,6 @@ export default class InvadersGrid {
     return bottomInvaders.filter((invader) => invader !== null);
   }
 
-
   getBombDropPosition() {
     const bottomInvaders = this.getBottomInvaders();
 
@@ -161,5 +160,18 @@ export default class InvadersGrid {
       x: randomInvader.position.x + randomInvader.sprite.scaledWidth / 2,
       y: randomInvader.position.y + randomInvader.sprite.scaledHeight,
     };
+  }
+
+  reset() {
+    this.invadersGrid = this.createInvadersGrid();
+    this.direction = "right";
+    this.movementSpeed = 10;
+    this.dropDownDistance = 30;
+    this.speedFactor = 2;
+    this.lastUpdateTime = null;
+    this.gridVisible = false;
+    this.moving = false;
+
+    this.drawOffscreen();
   }
 }

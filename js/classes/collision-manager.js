@@ -27,7 +27,7 @@ export default class CollisionManager {
 
           // Check if the invaders grid is empty and end the game if it is
           if (invadersGrid.invadersGrid.length === 0) {
-            this.game.gameOver = true;
+            this.game.gameWon = true;
             console.log("Game Won");
           }
 

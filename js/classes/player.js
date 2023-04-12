@@ -114,4 +114,8 @@ export default class Player {
 
     this.velocity.x = 0;
   }
+
+  resetPosition() {
+    this.position = { ...this.initialPosition };
+  }
 }

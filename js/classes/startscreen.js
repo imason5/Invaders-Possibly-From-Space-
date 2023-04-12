@@ -37,4 +37,9 @@ export default class StartScreen {
 
     requestAnimationFrame(startFadeOut);
   }
+
+  showButton() {
+    this.startButton.style.display = "block";
+    console.log(this.startButton);
+  }
 }
