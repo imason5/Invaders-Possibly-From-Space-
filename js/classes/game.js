@@ -13,6 +13,8 @@ import SoundManager from "/js/classes/sound-manager.js";
 export default class Game {
   // 1. Constructor and initialization methods
   constructor(level) {
+    this.introVideoPlayed = false;
+    this.setupVideoButtons();
     this.initializeGame(level);
     this.addEventListeners();
     this.startGame();
@@ -42,10 +44,17 @@ export default class Game {
   // 2. Game loop methods
 
   startGame() {
+    if (!this.introVideoPlayed) {
+      this.playIntroVideo();
+      return;
+    }
+
     if (!this.gameStarted) {
-      this.gameStarted = true;
-      this.inGame = true;
-      this.gameLoop();
+      if (!this.gameStarted) {
+        this.gameStarted = true;
+        this.inGame = true;
+        this.gameLoop();
+      }
     }
   }
 
@@ -285,6 +294,47 @@ export default class Game {
         this.soundManager.togglePlay("backgroundMusic");
         musicControlButton.innerText = "Pause Music";
       }
+    });
+  }
+  playIntroVideo() {
+    if (this.introVideoPlayed) {
+      return;
+    }
+
+    const video = document.getElementById("introVideo");
+    video.style.display = "block";
+    video.play();
+
+    video.addEventListener("ended", () => {
+      video.style.display = "none";
+      this.introVideoPlayed = true;
+      this.startGame();
+    });
+  }
+
+  setupVideoButtons() {
+    const playIntroVideoButton = document.getElementById(
+      "playIntroVideoButton"
+    );
+    const skipIntroVideoButton = document.getElementById(
+      "skipIntroVideoButton"
+    );
+    const video = document.getElementById("introVideo");
+
+    playIntroVideoButton.addEventListener("click", () => {
+      if (!this.introVideoPlayed) {
+        this.playIntroVideo();
+        playIntroVideoButton.classList.add("hidden");
+        // skipIntroVideoButton.classList.add("hidden");
+      }
+    });
+
+    skipIntroVideoButton.addEventListener("click", () => {
+      video.style.display = "none";
+      this.introVideoPlayed = true;
+      playIntroVideoButton.classList.add("hidden");
+      skipIntroVideoButton.classList.add("hidden");
+      this.startGame();
     });
   }
 
