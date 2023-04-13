@@ -96,6 +96,7 @@ export default class Game {
     // Responsible for drawing the current state of the game.
     // It clears the canvas, draws the background, the player, the invaders grid, the score, and all projectiles/bombs
     this.canvas.clear();
+
     this.canvas.drawBackground();
     this.player.draw(this.canvas.context);
     this.invadersGrid.draw();
@@ -110,6 +111,11 @@ export default class Game {
     this.bombs.forEach((bomb) => {
       bomb.draw(this.canvas.context);
     });
+
+    if (this.bossShip) {
+      this.bossShip.update();
+      this.bossShip.draw();
+    }
 
     // Stops the drawing of the canvas if the game is over or won
     if (this.gameOver || this.gameWon) {

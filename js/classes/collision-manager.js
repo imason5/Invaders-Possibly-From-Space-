@@ -34,7 +34,7 @@ export default class CollisionManager {
           projectiles.splice(i, 1);
           invadersGrid.drawOffscreen();
 
-          if (invadersGrid.invadersGrid.length === 50) {
+          if (invadersGrid.invadersGrid.length === 40) {
             this.game.soundManager.play("enemyDialogue");
           }
 

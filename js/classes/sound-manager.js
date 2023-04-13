@@ -13,6 +13,10 @@ export default class SoundManager {
     // Set the volume for background music
     this.sounds.backgroundMusic.volume = 0.3;
 
+    this.sounds.playerShoot.volume = 0.3;
+
+    this.sounds.invaderKilled.volume = 0.3;
+
     // Loop the background music
     this.sounds.backgroundMusic.loop = true;
   }
