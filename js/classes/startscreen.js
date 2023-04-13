@@ -32,6 +32,7 @@ export default class StartScreen {
           this.game.gameStarted = true;
           this.game.invadersGrid.startInvadersMovement();
           this.game.player.playerReadyToFire = true;
+          this.game.score.scoreVisible = true;
         });
       });
     };

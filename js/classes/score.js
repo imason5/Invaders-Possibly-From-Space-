@@ -1,6 +1,7 @@
 export default class Score {
   constructor() {
     this.value = 0;
+    this.scoreVisible = false;
   }
 
   increase(amount) {
@@ -12,8 +13,14 @@ export default class Score {
   }
 
   draw(ctx) {
-    ctx.font = "20px Arial";
-    ctx.fillStyle = "white";
-    ctx.fillText(`Score: ${this.value}`, 10, 30);
+    if (this.scoreVisible) {
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "white";
+      ctx.fillText(`Score: ${this.value}`, 10, 30);
+    }
+  }
+
+  toggleVisibility() {
+    this.scoreVisible = !this.scoreVisible;
   }
 }

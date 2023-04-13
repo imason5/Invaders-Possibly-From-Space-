@@ -8,7 +8,7 @@ export default class SoundManager {
     };
 
     // Set the volume for background music
-    this.sounds.backgroundMusic.volume = 0.5;
+    this.sounds.backgroundMusic.volume = 0.0;
 
     // Loop the background music
     this.sounds.backgroundMusic.loop = true;

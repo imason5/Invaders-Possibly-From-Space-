@@ -255,10 +255,10 @@ export default class Game {
     musicControlButton.addEventListener("click", () => {
       if (this.soundManager.isPlaying("backgroundMusic")) {
         this.soundManager.togglePlay("backgroundMusic");
-        musicControlButton.innerText = "Unmute";
+        musicControlButton.innerText = "Play Music";
       } else {
         this.soundManager.togglePlay("backgroundMusic");
-        musicControlButton.innerText = "Mute";
+        musicControlButton.innerText = "Pause Music";
       }
     });
   }
@@ -281,6 +281,7 @@ export default class Game {
     this.startScreen.setupEventListeners();
     this.startScreen.showButton();
     this.score.reset();
+    this.score.scoreVisible = false;
   }
 
   // CHEATS
