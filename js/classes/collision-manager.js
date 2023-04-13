@@ -14,12 +14,15 @@ export default class CollisionManager {
     const projectiles = this.game.projectiles;
     const invadersGrid = this.game.invadersGrid;
 
+    // Loop through all projectiles
     for (let i = 0; i < projectiles.length; i++) {
       const projectile = projectiles[i];
 
+      // Loop through all invaders
       for (let j = 0; j < invadersGrid.invadersGrid.length; j++) {
         const invader = invadersGrid.invadersGrid[j];
 
+        // Check if there is a collision between the projectile and the invader
         if (invader && this.checkCollision(projectile, invader)) {
           const invaderScore = invader.sprite.points;
           this.game.score.increase(invaderScore);

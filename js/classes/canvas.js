@@ -8,6 +8,7 @@ export default class Canvas {
   setLevelBackground(level) {
     let bgImage = "";
 
+    // The background image is determined based on the level number. Levels to be implemented.
     switch (level) {
       case 0:
         bgImage = "/images/start.jpg";
