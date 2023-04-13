@@ -6,11 +6,7 @@
 
 ## Description
 
-A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspiration taken from the 1980's arcade game, and from an episode of [Futurama](https://futurama.fandom.com/wiki/Anthology_of_Interest_II). Some twists on the original game include:
-
-- Powerups
-- Boss ships
--
+A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspiration taken from the late 1970's arcade game, and from an episode of [Futurama](https://futurama.fandom.com/wiki/Anthology_of_Interest_II).
 
 <hr>
 
@@ -41,11 +37,11 @@ A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspirat
 
 ## Data structure
 
-_List of classes and methods_
-
 ## States & States Transitions
 
-_List of states (views) of your game_
+- Start Screen
+- Game Screen
+- Restart Screen
 
 <hr>
 
@@ -69,14 +65,15 @@ _List of states (views) of your game_
 
 ###Bonus
 
+- [ ] Invaders speed up
 - [ ] Player lives
 - [ ] Multiple bomb types
 - [ ] Bunkers
-- [ ] Scoring
+- [x] Scoring
 - [ ] Boss ship
 - [ ] Powerups
 - [ ] Harder enemies/level changes
-- [ ] Sound effects/Music
+- [x] Sound effects/Music
 - [ ] Tidy ui
 - [ ] Local storage for session scores
 - [ ] Leaderboard (firebase)
