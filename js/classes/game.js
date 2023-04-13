@@ -246,8 +246,6 @@ export default class Game {
     this.bombs.forEach((bomb) => {
       bomb.update();
     });
-
-    // Removes any bombs that have gone off the bottom of the screen.
     this.bombs = this.bombs.filter((bomb) => {
       const bombOffScreen = bomb.position.y > this.canvas.height + bomb.height;
       return !bombOffScreen;
