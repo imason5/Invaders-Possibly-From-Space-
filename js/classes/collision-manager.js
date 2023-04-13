@@ -31,6 +31,10 @@ export default class CollisionManager {
           projectiles.splice(i, 1);
           invadersGrid.drawOffscreen();
 
+          if (invadersGrid.invadersGrid.length === 50) {
+            this.game.soundManager.play("enemyDialogue");
+          }
+
           if (invadersGrid.invadersGrid.length === 0) {
             this.game.gameWon = true;
             console.log("Game Won");

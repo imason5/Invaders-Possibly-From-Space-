@@ -5,10 +5,13 @@ export default class SoundManager {
       invaderKilled: new Audio("/audio/invader-killed.wav"),
       explosion: new Audio("/audio/explosion.wav"),
       backgroundMusic: new Audio("/audio/tom-sawyer.mp3"),
+      gameOver: new Audio("/audio/lose.wav"),
+      enemyDialogue: new Audio("/audio/enemy-dialogue.wav"),
+      gameWon: new Audio("/audio/win.wav"),
     };
 
     // Set the volume for background music
-    this.sounds.backgroundMusic.volume = 0.5;
+    this.sounds.backgroundMusic.volume = 0.3;
 
     // Loop the background music
     this.sounds.backgroundMusic.loop = true;
