@@ -8,6 +8,8 @@
 
 A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspiration taken from the late 1970's arcade game, and from an episode of [Futurama](https://futurama.fandom.com/wiki/Anthology_of_Interest_II).
 
+Developed at the end of Module One of the [Ironhack](https://www.ironhack.com/uk/en/web-development/remote) Web Development Bootcamp.
+
 <hr>
 
 ## MVP
@@ -19,7 +21,7 @@ A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspirat
 - The player can shoot projectiles at the invaders.
 - The invaders die to one shot, if player is hit they die.
 - If the invaders reach the bottom of the screen the player loses.
-- When all invaders are destroyed a congratulations screen. The game board is reset.
+- When all invaders are destroyed a congratulations screen. The game board is reset on win or loss.
 
 ## Backlog
 

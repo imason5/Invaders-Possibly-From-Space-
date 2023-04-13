@@ -40,7 +40,6 @@ export default class CollisionManager {
 
           if (invadersGrid.invadersGrid.length === 0) {
             this.game.gameWon = true;
-            console.log("Game Won");
           }
 
           i--;
@@ -61,7 +60,7 @@ export default class CollisionManager {
       // Check if there is a collision between the bomb and the player
       if (this.checkCollision(bomb, player)) {
         this.game.gameOver = true;
-        console.log("Game Over");
+
         bombs.splice(i, 1);
         i--;
 
@@ -84,7 +83,7 @@ export default class CollisionManager {
         invader.position.y + invader.sprite.scaledHeight >= player.position.y
       ) {
         this.game.gameOver = true;
-        console.log("Game Over");
+
         return;
       }
     }

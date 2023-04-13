@@ -38,9 +38,9 @@ export default class Game {
   }
 
   addEventListeners() {
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
-    document.addEventListener("keyup", this.handleKeyUp.bind(this));
-    document.addEventListener("keydown", this.handleKeyG.bind(this));
+    document.addEventListener("keydown", (event) => this.handleKeyDown(event));
+    document.addEventListener("keyup", (event) => this.handleKeyUp(event));
+    document.addEventListener("keydown", (event) => this.handleKeyG(event));
   }
 
   startGame() {
@@ -54,6 +54,7 @@ export default class Game {
     // Main loop function of the game.
     // Updates the projectiles and bombs if the game has started
     if (this.gameStarted) {
+      this.updatePlayer();
       this.updateProjectiles();
       this.spawnBombs();
       this.updateBombs();
@@ -79,35 +80,7 @@ export default class Game {
     this.keysPressed[event.key] = false;
   }
 
-  update() {
-    if (this.gameOver || this.gameWon) {
-      this.gameStopped = true;
-      this.soundManager.stop("backgroundMusic");
-      this.restartScreen = new RestartScreen(
-        this.canvas,
-        this.gameWon ? "Game Won" : "Game Over",
-        this,
-        this.startScreen
-      );
-      this.restartScreen.draw();
-      this.restartScreen.showButton();
-      return;
-    }
-  }
-
-  draw() {
-    // Responsible for drawing the current state of the game.
-    // It clears the canvas, draws the background, the player, and all projectiles,
-    // and updates the player's movement if necessary.
-    this.canvas.clear();
-    this.canvas.drawBackground();
-    this.player.draw(this.canvas.context);
-    this.invadersGrid.draw();
-    this.collisionManager.checkCollisions();
-
-    this.score.draw(this.canvas.context);
-
-    // Handles player movement
+  updatePlayer() {
     if (this.keysPressed["ArrowLeft"] || this.keysPressed["a"]) {
       this.player.moveLeft();
       this.player.moving = true;
@@ -127,6 +100,43 @@ export default class Game {
 
     // Call handlePlayerMovement with the value of this.player.moving
     this.player.handlePlayerMovement(this.player.moving);
+  }
+
+  update() {
+    if (this.gameOver || this.gameWon) {
+      if (!this.gameStopped) {
+        this.gameStopped = true;
+        this.soundManager.stop("backgroundMusic");
+
+        if (this.gameWon) {
+          this.soundManager.play("gameWon");
+        } else {
+          this.soundManager.play("gameOver");
+        }
+
+        this.restartScreen = new RestartScreen(
+          this.canvas,
+          this.gameWon ? "Game Won" : "Game Over",
+          this,
+          this.startScreen
+        );
+
+        this.restartScreen.showButton();
+        this.restartScreen.draw();
+      }
+
+      return;
+    }
+  }
+  draw() {
+    // Responsible for drawing the current state of the game.
+    // It clears the canvas, draws the background, the player, and all projectiles,
+    this.canvas.clear();
+    this.canvas.drawBackground();
+    this.player.draw(this.canvas.context);
+    this.invadersGrid.draw();
+    this.collisionManager.checkCollisions();
+    this.score.draw(this.canvas.context);
 
     // Draws all projectiles and bombs
     this.projectiles.forEach((projectile) => {
@@ -137,33 +147,7 @@ export default class Game {
       bomb.draw(this.canvas.context);
     });
 
-    if (this.gameOver) {
-      this.gameStopped = true;
-      this.soundManager.stop("backgroundMusic");
-      this.soundManager.play("gameOver");
-      this.restartScreen = new RestartScreen(
-        this.canvas,
-        "Game Over",
-        this,
-        this.startScreen
-      );
-      this.restartScreen.draw();
-      this.restartScreen.showButton();
-      return;
-    }
-
-    if (this.gameWon) {
-      this.gameStopped = true;
-      this.soundManager.stop("backgroundMusic");
-      this.soundManager.play("gameWon");
-      this.restartScreen = new RestartScreen(
-        this.canvas,
-        "Game Won",
-        this,
-        this.startScreen
-      );
-      this.restartScreen.draw();
-      this.restartScreen.showButton();
+    if (this.gameOver || this.gameWon) {
       return;
     }
   }
@@ -172,7 +156,6 @@ export default class Game {
     if (!this.player.playerReadyToFire) {
       return;
     }
-
     const now = Date.now();
     const timeSinceLastProjectile = now - this.lastProjectileTime;
     const firingInterval = 500; // Modify the time interval between firing projectiles
