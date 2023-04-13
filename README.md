@@ -6,7 +6,7 @@
 
 ## Description
 
-A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspiration taken from the late 1970's arcade game, and from an episode of [Futurama](https://futurama.fandom.com/wiki/Anthology_of_Interest_II).
+A Space Invaders game made with HTML5 Canvas, CSS and JavaScript. Theme inspiration taken from the late 1970's arcade game, and from an episode of [Futurama](https://youtu.be/UuEARrNbOdo?t=141).
 
 Developed at the end of Module One of the [Ironhack](https://www.ironhack.com/uk/en/web-development/remote) Web Development Bootcamp.
 
@@ -115,11 +115,41 @@ Manages the restart screen of the game, which is displayed when the game is over
 
 Manages the game canvas, handling background images, drawing and clearing the canvas, and providing fadeIn and fadeOut animations for smooth transitions between different game states or screens.
 
+#### Sprite()
+
+Handles the game sprite sheet, allowing for drawing it on the canvas while optionally removing dark pixels to make them transparent. The class provides methods to draw the sprite with or without transparency.
+
+#### Player()
+
+It manages the player's sprite, position, movement, and visibility. The class provides methods for drawing the player on the canvas, moving the player left or right, starting and stopping the animation, and resetting the player's position to the initial state.
+
+#### Invaders()
+
+Represents an enemy invader in the game. It takes a type (small, medium, or large) and position as input and manages the invader's sprite and position. The class provides a method for drawing the invader on the canvas and animating it by switching between two sprites.
+
+#### InvadersGrid()
+
+Responsible for creating the grid layout of invaders, managing their movement and animation, and handling the interactions such as dropping bombs and removing invaders when they are hit. The class also implements an offscreen canvas for performance optimization when drawing the grid on the main canvas.
+
+#### Projectiles()
+
+Renders the player projectile on the canvas, updating its position based on its velocity, and handling the firing mechanism by checking if the projectile can be fired and creating a new projectile instance when fired.
+
+#### CollisionManager()
+
+Detects and handles collisions between game entities such as projectiles, bombs, invaders, and the player. When collisions are detected, it updates the game state and triggers appropriate actions, like removing entities or playing sounds.
+
+#### Other Classes
+
+- Bombs() extends Projectiles()
+- Score()
+- SoundManager()
+
 ## States & States Transitions
 
 - Start Screen
 - Game Screen
-- Restart Screen
+- Restart Screen - different audio for winner or loser.
 
 <hr>
 
