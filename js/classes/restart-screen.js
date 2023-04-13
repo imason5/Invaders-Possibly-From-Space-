@@ -1,5 +1,3 @@
-import StartScreen from "./startscreen.js";
-
 export default class RestartScreen {
   constructor(canvas, message, game) {
     this.canvas = canvas;

@@ -59,7 +59,7 @@ export default class Game {
       this.updateBombs();
     }
     // Updates the canvas and calls itself again.
-    this.draw();
+    this.update();
     this.draw();
 
     if (!this.gameStopped) {
@@ -254,10 +254,10 @@ export default class Game {
     const musicControlButton = document.getElementById("musicControl");
     musicControlButton.addEventListener("click", () => {
       if (this.soundManager.isPlaying("backgroundMusic")) {
-        this.soundManager.stop("backgroundMusic");
+        this.soundManager.togglePlay("backgroundMusic");
         musicControlButton.innerText = "Unmute";
       } else {
-        this.soundManager.play("backgroundMusic");
+        this.soundManager.togglePlay("backgroundMusic");
         musicControlButton.innerText = "Mute";
       }
     });

@@ -30,4 +30,27 @@ export default class SoundManager {
       console.warn(`Sound "${soundName}" not found.`);
     }
   }
+
+  togglePlay(soundName) {
+    if (this.sounds[soundName]) {
+      if (this.sounds[soundName].paused) {
+        this.sounds[soundName].play();
+      } else {
+        this.sounds[soundName].pause();
+      }
+    } else {
+      console.warn(`Sound "${soundName}" not found.`);
+    }
+  }
+
+  isPlaying(soundName) {
+    if (this.sounds[soundName]) {
+      return (
+        !this.sounds[soundName].paused && this.sounds[soundName].currentTime > 0
+      );
+    } else {
+      console.warn(`Sound "${soundName}" not found.`);
+      return false;
+    }
+  }
 }
