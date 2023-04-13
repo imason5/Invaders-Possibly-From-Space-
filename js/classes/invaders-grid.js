@@ -118,10 +118,20 @@ export default class InvadersGrid {
     const timeElapsed = currentTime - this.lastUpdateTime;
 
     // Update the invaders grid every 500ms
-    if (timeElapsed >= 500 && this.gridVisible) {
+    if (timeElapsed >= 600 && this.gridVisible) {
       this.update();
       this.lastUpdateTime = currentTime;
     }
+
+    this.offscreenContext.clearRect(
+      0,
+      0,
+      this.offscreenCanvas.width,
+      this.offscreenCanvas.height
+    );
+
+    this.invadersGrid.forEach((invader) => invader.draw(this.offscreenContext));
+
     requestAnimationFrame(this.updateInvadersGrid);
   }
 

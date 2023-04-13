@@ -41,7 +41,7 @@ export class WigglyBomb extends Bomb {
     this.sprite2.scaledWidth = this.sprite2.width * this.sprite2.scalingFactor;
     this.sprite2.scaledHeight =
       this.sprite2.height * this.sprite2.scalingFactor;
-    this.animationDuration = 500; // Time in milliseconds between sprite changes
+    this.animationDuration = 300; // Time in milliseconds between sprite changes
   }
 
   draw(context) {
