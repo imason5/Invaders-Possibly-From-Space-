@@ -11,6 +11,7 @@ import Score from "/js/classes/score.js";
 import SoundManager from "./sound-manager.js";
 
 export default class Game {
+  // 1. Constructor and initialization methods
   constructor(level) {
     this.initializeGame(level);
     this.addEventListeners();
@@ -37,11 +38,7 @@ export default class Game {
     this.score = new Score();
   }
 
-  addEventListeners() {
-    document.addEventListener("keydown", (event) => this.handleKeyDown(event));
-    document.addEventListener("keyup", (event) => this.handleKeyUp(event));
-    document.addEventListener("keydown", (event) => this.handleKeyG(event));
-  }
+  // 2. Game loop methods
 
   startGame() {
     if (!this.gameStarted) {
@@ -66,40 +63,6 @@ export default class Game {
     if (!this.gameStopped) {
       requestAnimationFrame(() => this.gameLoop());
     }
-  }
-
-  handleKeyDown(event) {
-    this.keysPressed[event.key] = true;
-
-    if (event.key === " ") {
-      this.createProjectile();
-    }
-  }
-
-  handleKeyUp(event) {
-    this.keysPressed[event.key] = false;
-  }
-
-  updatePlayer() {
-    if (this.keysPressed["ArrowLeft"] || this.keysPressed["a"]) {
-      this.player.moveLeft();
-      this.player.moving = true;
-    }
-    if (this.keysPressed["ArrowRight"] || this.keysPressed["d"]) {
-      this.player.moveRight();
-      this.player.moving = true;
-    }
-    if (
-      !this.keysPressed["ArrowLeft"] &&
-      !this.keysPressed["a"] &&
-      !this.keysPressed["ArrowRight"] &&
-      !this.keysPressed["d"]
-    ) {
-      this.player.moving = false;
-    }
-
-    // Call handlePlayerMovement with the value of this.player.moving
-    this.player.handlePlayerMovement(this.player.moving);
   }
 
   update() {
@@ -128,9 +91,10 @@ export default class Game {
       return;
     }
   }
+
   draw() {
     // Responsible for drawing the current state of the game.
-    // It clears the canvas, draws the background, the player, and all projectiles,
+    // It clears the canvas, draws the background, the player, the invaders grid, the score, and all projectiles/bombs
     this.canvas.clear();
     this.canvas.drawBackground();
     this.player.draw(this.canvas.context);
@@ -147,9 +111,53 @@ export default class Game {
       bomb.draw(this.canvas.context);
     });
 
+    // Stops the drawing of the canvas if the game is over or won
     if (this.gameOver || this.gameWon) {
       return;
     }
+  }
+
+  // 3. Input handling methods
+
+  addEventListeners() {
+    document.addEventListener("keydown", (event) => this.handleKeyDown(event));
+    document.addEventListener("keyup", (event) => this.handleKeyUp(event));
+    document.addEventListener("keydown", (event) => this.handleKeyG(event));
+  }
+
+  handleKeyDown(event) {
+    this.keysPressed[event.key] = true;
+
+    if (event.key === " ") {
+      this.createProjectile();
+    }
+  }
+
+  handleKeyUp(event) {
+    this.keysPressed[event.key] = false;
+  }
+
+  // 4. Player-related methods
+  updatePlayer() {
+    if (this.keysPressed["ArrowLeft"] || this.keysPressed["a"]) {
+      this.player.moveLeft();
+      this.player.moving = true;
+    }
+    if (this.keysPressed["ArrowRight"] || this.keysPressed["d"]) {
+      this.player.moveRight();
+      this.player.moving = true;
+    }
+    if (
+      !this.keysPressed["ArrowLeft"] &&
+      !this.keysPressed["a"] &&
+      !this.keysPressed["ArrowRight"] &&
+      !this.keysPressed["d"]
+    ) {
+      this.player.moving = false;
+    }
+
+    // Call handlePlayerMovement with the value of this.player.moving
+    this.player.handlePlayerMovement(this.player.moving);
   }
 
   createProjectile() {
@@ -181,6 +189,7 @@ export default class Game {
     this.lastProjectileTime = now;
   }
 
+  // 5. Projectile-related methods
   updateProjectiles() {
     // Updates the positions of all projectiles and removes any
     // that have gone off the top of the screen.
@@ -192,10 +201,7 @@ export default class Game {
     });
   }
 
-  showInvadersGrid() {
-    this.invadersGrid.gridVisible = true;
-  }
-
+  // 6. Bomb-related methods
   spawnBombs() {
     if (!this.invadersGrid.moving) {
       return;
@@ -235,18 +241,13 @@ export default class Game {
     });
   }
 
-  setupMusicControlButton() {
-    const musicControlButton = document.getElementById("musicControl");
-    musicControlButton.addEventListener("click", () => {
-      if (this.soundManager.isPlaying("backgroundMusic")) {
-        this.soundManager.togglePlay("backgroundMusic");
-        musicControlButton.innerText = "Play Music";
-      } else {
-        this.soundManager.togglePlay("backgroundMusic");
-        musicControlButton.innerText = "Pause Music";
-      }
-    });
+  // 7. Invaders-related methods
+
+  showInvadersGrid() {
+    this.invadersGrid.gridVisible = true;
   }
+
+  // 8. Game state management methods
 
   resetGame() {
     this.gameOver = false;
@@ -269,8 +270,21 @@ export default class Game {
     this.score.scoreVisible = false;
   }
 
-  // CHEATS
+  // 9. UI-related methods
+  setupMusicControlButton() {
+    const musicControlButton = document.getElementById("musicControl");
+    musicControlButton.addEventListener("click", () => {
+      if (this.soundManager.isPlaying("backgroundMusic")) {
+        this.soundManager.togglePlay("backgroundMusic");
+        musicControlButton.innerText = "Play Music";
+      } else {
+        this.soundManager.togglePlay("backgroundMusic");
+        musicControlButton.innerText = "Pause Music";
+      }
+    });
+  }
 
+  // 10. Cheat methods
   handleKeyG(event) {
     if (event.key === "g") {
       this.gameWon = true;

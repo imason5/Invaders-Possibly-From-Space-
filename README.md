@@ -39,6 +39,82 @@ Developed at the end of Module One of the [Ironhack](https://www.ironhack.com/uk
 
 ## Data structure
 
+#### main.js
+
+Entry point of the game. It imports the Game() and StartScreen() classes, and defines a preloadImages function. Inside the callback function of the preloadImages function, it creates a new instance of the Game() class, and a new instance of the StartScreen() class.
+
+#### Game()
+
+<b> Game() manages the overall state and functionality of the game. It handles game initialization, game loop, input handling, drawing and updating game objects, managing the game state, and managing the UI elements, managing instances of other classes in the project to create the game. </b>
+
+1. Constructor and initialization methods
+
+- initializeGame(level)
+
+2.  Game loop methods (update and draw)
+
+- startGame()
+
+- gameLoop()
+
+- update()
+
+- draw()
+
+3. Input handling methods (event listeners and key handling)
+
+- addEventListeners()
+
+- handleKeyDown(event)
+
+- handleKeyUp(event)
+
+4. Player-related methods
+
+- updatePlayer()
+
+- createProjectile()
+
+5. Projectile-related methods
+
+- updateProjectiles()
+
+6. Bomb-related methods
+
+- spawnBombs()
+
+- dropBombFromInvaders()
+
+- updateBombs()
+
+7. Invader-related methods
+
+- showInvadersGrid()
+
+8. Game state management methods
+
+- resetGame()
+
+9. UI-related methods (music control button, etc.)
+
+- setupMusicControlButton()
+
+10. Cheat methods
+
+- handleKeyG(event)
+
+#### StartScreen()
+
+Handles display of start button and transition to game screen. Sets up the game by showing the invaders grid, making the player visible and starting the background music.
+
+#### RestartScreen()
+
+Manages the restart screen of the game, which is displayed when the game is over or won. It handles showing and hiding the restart button, listening for user input and resetting the game state to start a new game when the user decides to restart.
+
+#### Canvas()
+
+Manages the game canvas, handling background images, drawing and clearing the canvas, and providing fadeIn and fadeOut animations for smooth transitions between different game states or screens.
+
 ## States & States Transitions
 
 - Start Screen
@@ -77,14 +153,14 @@ Developed at the end of Module One of the [Ironhack](https://www.ironhack.com/uk
 - [ ] Harder enemies/level changes
 - [x] Sound effects/Music
 - [ ] Tidy ui
-- [ ] Local storage for session scores
-- [ ] Leaderboard (firebase)
+- [ ] Local storage for session scores/ leaderboard
 - [ ] Easter Eggs/Cheats
 
 <hr>
 
 ## Links
 
+- [Figma Planning](https://www.figma.com/file/5cTbiap1GEzgBVF4YvJg7E/INVADERS!-Possibly-from-SPACE!?node-id=0-1&t=wUakKrWXNdWOCOzw-0)
 - [Trello Link](https://trello.com/b/mz5nAvYU/invaders-kanban)
 - [Slides Link](http://slides.com)
 - [Github repository Link](https://github.com/imason5/invaders-game)
