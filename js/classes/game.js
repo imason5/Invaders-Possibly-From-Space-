@@ -325,7 +325,7 @@ export default class Game {
       if (!this.introVideoPlayed) {
         this.playIntroVideo();
         playIntroVideoButton.classList.add("hidden");
-        // skipIntroVideoButton.classList.add("hidden");
+        skipIntroVideoButton.classList.add("hidden");
       }
     });
 
