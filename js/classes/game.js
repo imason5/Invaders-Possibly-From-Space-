@@ -139,6 +139,7 @@ export default class Game {
 
     if (this.gameOver) {
       this.gameStopped = true;
+      this.soundManager.stop("backgroundMusic");
       this.restartScreen = new RestartScreen(
         this.canvas,
         "Game Over",
@@ -152,6 +153,7 @@ export default class Game {
 
     if (this.gameWon) {
       this.gameStopped = true;
+      this.soundManager.stop("backgroundMusic");
       this.restartScreen = new RestartScreen(
         this.canvas,
         "Game Won",
