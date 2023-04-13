@@ -14,7 +14,7 @@ export default class Score {
 
   draw(ctx) {
     if (this.scoreVisible) {
-      ctx.font = "20px sans-serif";
+      ctx.font = "30px VT323, monospace";
       ctx.fillStyle = "white";
       ctx.fillText(`Score: ${this.value}`, 10, 30);
     }

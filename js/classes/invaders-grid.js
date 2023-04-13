@@ -8,8 +8,8 @@ export default class InvadersGrid {
     this.movementSpeed = 10;
     this.dropDownDistance = 30;
     this.speedFactor = 2; // Increase to make the invaders move faster
-    this.speedIncreaseFactor = 1.02; // How much faster the invaders get after each kill
-    this.finalInvaderSpeedFactor = 10; // Speed factor for the last invader
+    this.speedIncreaseFactor = 1.03; // How much faster the invaders get after each kill
+    this.finalInvaderSpeedFactor = 12; // Speed factor for the last invader
 
     this.lastUpdateTime = null;
     this.gridVisible = false;

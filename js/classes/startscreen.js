@@ -45,4 +45,8 @@ export default class StartScreen {
     this.startButton.style.opacity = "1";
     console.log(this.startButton);
   }
+
+  isButtonHidden() {
+    return this.button.classList.contains("hidden");
+  }
 }

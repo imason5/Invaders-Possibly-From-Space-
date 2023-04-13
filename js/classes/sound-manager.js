@@ -8,6 +8,9 @@ export default class SoundManager {
       gameOver: new Audio("/audio/lose.wav"),
       enemyDialogue: new Audio("/audio/enemy-dialogue.wav"),
       gameWon: new Audio("/audio/win.wav"),
+
+      // Boss Dialogue
+      bossDialogue1: new Audio("/audio/boss1.wav"),
     };
 
     // Set the volume for background music

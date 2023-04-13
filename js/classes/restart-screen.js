@@ -27,7 +27,6 @@ export default class RestartScreen {
       this.hideButton();
       this.game.resetGame();
       this.game.startGame();
-      console.log("Restarting game");
     };
     this.handleKeyDown = (event) => {
       if (event.key === "Enter") {
@@ -43,6 +42,5 @@ export default class RestartScreen {
     this.hideButton();
     this.game.resetGame();
     this.game.startGame();
-    console.log("Restarting game");
   }
 }

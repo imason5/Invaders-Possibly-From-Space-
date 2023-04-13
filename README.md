@@ -31,9 +31,7 @@ Developed at the end of Module One of the [Ironhack](https://www.ironhack.com/uk
 - Harder levels with faster invaders/more ships/fewer bunkers.
 - Boss levels
 - Nicer UI
-- Sound effects
 - Local storage for session scores
-- Host on firebase
 
 <hr>
 
@@ -173,7 +171,7 @@ Detects and handles collisions between game entities such as projectiles, bombs,
 
 ###Bonus
 
-- [ ] Invaders speed up
+- [x] Invaders speed up
 - [ ] Player lives
 - [ ] Multiple bomb types
 - [ ] Bunkers
@@ -192,6 +190,6 @@ Detects and handles collisions between game entities such as projectiles, bombs,
 
 - [Figma Planning](https://www.figma.com/file/5cTbiap1GEzgBVF4YvJg7E/INVADERS!-Possibly-from-SPACE!?node-id=0-1&t=wUakKrWXNdWOCOzw-0)
 - [Trello Link](https://trello.com/b/mz5nAvYU/invaders-kanban)
-- [Slides Link](http://slides.com)
+- [Slides Link](https://docs.google.com/presentation/d/1A_8p_llirh1droBAwcyadLVMxp3_LBygRVeoCedGVmY/edit?usp=sharing)
 - [Github repository Link](https://github.com/imason5/invaders-game)
 - [Deployment Link](https://invaders-game-lemon.vercel.app/)

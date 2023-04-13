@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
 /* GENERAL */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
+  font-family: "VT323", monospace;
 }
 
 body {
@@ -11,7 +14,6 @@ body {
   background-image: url(/images/bg-large.jpg);
   background-size: cover;
   background-position: center center;
-  font-family: sans-serif;
 }
 
 /* CANVAS */
@@ -38,7 +40,6 @@ body {
 #startButton {
   position: absolute;
   cursor: pointer;
-  font-family: sans-serif;
   color: #fff;
   text-transform: uppercase;
   font-size: 4em;
@@ -56,6 +57,7 @@ body {
   padding: 0;
   margin: 0;
   transition: opacity 1s;
+  letter-spacing: 1rem;
 }
 
 /* RESTART SCREEN */
@@ -63,7 +65,6 @@ body {
 #restartButton {
   position: absolute;
   cursor: pointer;
-  font-family: sans-serif;
   color: #fff;
   text-transform: uppercase;
   font-size: 4em;
@@ -81,6 +82,7 @@ body {
   padding: 0;
   margin: 0;
   transition: opacity 1s;
+  letter-spacing: 1rem;
 }
 
 .hidden {
@@ -91,7 +93,8 @@ body {
 
 .music-control {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  font-size: large;
+  top: 20px;
+  right: 20px;
   z-index: 2;
 }
