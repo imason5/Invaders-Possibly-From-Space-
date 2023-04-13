@@ -8,6 +8,9 @@ export default class InvadersGrid {
     this.movementSpeed = 10;
     this.dropDownDistance = 30;
     this.speedFactor = 2; // Increase to make the invaders move faster
+    this.speedIncreaseFactor = 1.02; // How much faster the invaders get after each kill
+    this.finalInvaderSpeedFactor = 10; // Speed factor for the last invader
+
     this.lastUpdateTime = null;
     this.gridVisible = false;
 
@@ -77,6 +80,12 @@ export default class InvadersGrid {
     if (!this.moving) {
       return;
     }
+
+    if (this.invadersGrid.length === 1) {
+      // Custom speed for the last invader
+      this.speedFactor = this.finalInvaderSpeedFactor;
+    }
+
     this.move();
   }
 
@@ -141,6 +150,7 @@ export default class InvadersGrid {
 
   removeInvader(index) {
     this.invadersGrid.splice(index, 1);
+    this.increaseSpeed();
   }
 
   getBottomInvaders() {
@@ -176,6 +186,11 @@ export default class InvadersGrid {
     };
   }
 
+  increaseSpeed() {
+    this.speedFactor *= this.speedIncreaseFactor;
+    console.log("Speed factor increased to:", this.speedFactor);
+  }
+
   reset() {
     this.invadersGrid = this.createInvadersGrid();
     this.direction = "right";
@@ -185,6 +200,7 @@ export default class InvadersGrid {
     this.lastUpdateTime = null;
     this.gridVisible = false;
     this.moving = false;
+    this.speedFactor = 2;
 
     this.drawOffscreen();
   }
