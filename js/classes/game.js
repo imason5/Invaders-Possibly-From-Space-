@@ -9,7 +9,6 @@ import RestartScreen from "/js/classes/restart-screen.js";
 import StartScreen from "/js/classes/startscreen.js";
 import Score from "/js/classes/score.js";
 import SoundManager from "/js/classes/sound-manager.js";
-import BossShip from "/js/classes/boss-ship.js";
 
 export default class Game {
   // 1. Constructor and initialization methods
@@ -32,7 +31,6 @@ export default class Game {
     this.invadersGrid = new InvadersGrid(this.canvas.context);
     this.collisionManager = new CollisionManager(this);
     this.bombDropCounter = 0;
-    this.bossShip = new BossShip(this.canvas.context);
 
     this.gameOver = false;
     this.gameWon = false;
@@ -115,16 +113,6 @@ export default class Game {
     this.bombs.forEach((bomb) => {
       bomb.draw(this.canvas.context);
     });
-
-    if (this.bossShip && this.inGame) {
-      if (!this.bossShip.interval) {
-        this.bossShip.start();
-      }
-      this.bossShip.update();
-      this.bossShip.draw();
-    } else if (!this.inGame && this.bossShip.interval) {
-      this.bossShip.stop();
-    }
 
     // Stops the drawing of the canvas if the game is over or won
     if (this.gameOver || this.gameWon) {
@@ -284,7 +272,6 @@ export default class Game {
     this.startScreen.showButton();
     this.score.reset();
     this.score.scoreVisible = false;
-    this.bossShip.stop();
   }
 
   // 9. UI-related methods

@@ -7,7 +7,6 @@ export default class CollisionManager {
     this.checkProjectileCollisions();
     this.checkBombCollisions();
     this.checkInvadersReachedPlayer();
-    this.checkBossShipCollision();
   }
 
   // Checks collisions between projectiles and invaders
@@ -67,29 +66,6 @@ export default class CollisionManager {
 
         // Play the explosion sound
         this.game.soundManager.play("explosion");
-      }
-    }
-  }
-
-  checkBossShipCollision() {
-    const projectiles = this.game.projectiles;
-    const bossShip = this.game.bossShip;
-
-    if (!bossShip) {
-      return;
-    }
-
-    for (let i = 0; i < projectiles.length; i++) {
-      const projectile = projectiles[i];
-
-      if (this.checkCollision(projectile, bossShip)) {
-        this.game.score.increase(bossShip.points);
-        this.game.soundManager.play("invaderKilled"); // Or play a different sound if you want
-        projectiles.splice(i, 1);
-        this.game.bossShip = null;
-        this.game.nextBossShipSpawnTime =
-          Date.now() + this.game.bossShipSpawnInterval;
-        break;
       }
     }
   }
