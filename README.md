@@ -1,6 +1,8 @@
 # Invaders! Possibly From Space!
 
-[Click here to see deployed game](https://invaders-game-lemon.vercel.app/)
+<b>[Click here to see deployed game](https://invaders-game-lemon.vercel.app/)</b>
+
+![Invaders! Possibly From Space!](/invaders-game/images/forReadme.png)
 
 <hr>
 
