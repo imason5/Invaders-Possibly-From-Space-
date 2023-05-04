@@ -2,7 +2,7 @@
 
 <b>[Click here to see deployed game](https://invaders-game-lemon.vercel.app/)</b>
 
-![Invaders! Possibly From Space!](/invaders-game/images/forReadme.png)
+![Invaders! Possibly From Space!](/images/forReadme.png)
 
 <hr>
 
